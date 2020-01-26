@@ -1,8 +1,9 @@
-$size: 0.7vmin;
+$size: 0.5vmin;
 
 .Page {
     background-color: white;
     width: 210*$size;
     height: 297*$size;
-    margin: auto;
+    margin: 20px auto;
+    padding-top: 40px;
 }
