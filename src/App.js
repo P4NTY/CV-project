@@ -4,6 +4,7 @@ import Page from './components/Page/Page';
 import Menu from './components/Menu/Menu';
 import Picture from "./components/Picture/Picture";
 import Box from "./components/Box/Box";
+import Budge from './components/Budge/Budge';
 
 import avatar from "./assets/pictures/new low.PNG";
 
@@ -12,7 +13,7 @@ function App() {
     <div className="App">
       <Menu/>
       <Page>
-        <Picture picture={avatar} type="circle"/>
+        <Picture picture={avatar} type="circle" />
         <Box title="Karol Kisz">
           <h2>Frontend Developer</h2>
           <p>Na codzień zajmuje się tworzeniem oraz utrzymaniem pulpitów oraz stron internetowych służących do prezentacji i wrpowadzania danych biznesowych.</p>
@@ -71,19 +72,34 @@ function App() {
           <ul>
             <li>
               <h2>Frontend</h2>
-              React, jQuery, SCSS (Sass), HTML5
+              <Budge img="" link="https://pl.reactjs.org/">React</Budge>
+              <Budge img="" link="">HTML5, CSS3</Budge>
+              <Budge img="" link="https://sass-lang.com/">SCSS (Sass)</Budge>
+              <Budge img="" link="https://jquery.com/">jQuery</Budge>
             </li>
             <li>
               <h2>Backend</h2>
-              Node.js, PHP, MySQL, Apex, OBIEE, GraphCMS
+              <Budge img="" link="https://nodejs.org/en/">Node.js</Budge>
+              <Budge img="" link="https://www.php.net/">PHP</Budge>
+              <Budge img="" link="https://www.mysql.com/">MySQL</Budge>
+              <Budge img="" link="https://apex.oracle.com/en/">Apex</Budge>
+              <Budge img="" link="https://www.oracle.com/pl/middleware/technologies/bi.html">OBIEE</Budge>
+              <Budge img="" link="https://graphcms.com/">GraphCMS</Budge>
+              <Budge img="" link="https://pl.python.org/">Python</Budge>
             </li>
             <li>
               <h2>Aplikacje</h2>
-              C#, Java
+              <Budge img="" link="https://docs.microsoft.com/pl-pl/dotnet/csharp/">C#</Budge>
+              <Budge img="" link="">Java</Budge>
+              <Budge img="" link="https://unity.com/">Unity</Budge>
             </li>
             <li>
               <h2>Systemy Operacyjne / oprogramowanie biurowe</h2>
-              Git, Windows, Linux, Android, Pakiet Office 
+              <Budge img="" link="">GIT</Budge>
+              <Budge img="" link="">Visual Studio Code</Budge>
+              <Budge img="" link="">Linux</Budge>
+              <Budge img="" link="">Android Studio</Budge>
+              <Budge img="" link="">Pakiet Office</Budge> 
             </li>
           </ul>
         </Box>

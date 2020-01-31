@@ -1,6 +1,8 @@
+$size: 200px;
+
 .picture {
-    width: 200px;
-    height: 200px;
+    width: $size;
+    height: $size;
     position: absolute;
     background-position: center;
     border: 10px solid steelblue;
