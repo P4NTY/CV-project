@@ -9,17 +9,29 @@ import Box from "./components/Box/Box";
 import Budge from './components/Budge/Budge';
 
 //import data
-import { getProjects, getTech } from "./Utils/dbase";
+import { getMainpage } from "./Utils/dbase";
 
 //import assets
 import avatar from "./assets/pictures/new low.PNG";
 
 class App  extends React.Component {
-
+  state = {
+    techs: [],
+    projects: []
+  }
   
+  setData = () => {
+    getMainpage().then( res => (
+      this.setState(()=>({
+        projects: res.data.projectses,
+        techs: res.data.teches
+      }))
+    ))
+  }
 
   render() {
-
+    const {techs, projects} = this.state;
+    if (projects.length === 0 && techs.length === 0) this.setData();
     return (
       <div className="App">
         <Menu/>
@@ -32,30 +44,16 @@ class App  extends React.Component {
           </Box>
           <Box title="Projekty">
             <ul>
-              <li>
-                <h2>MIS LITE (In Progress)</h2>
-                <p>Odświżona wersja raportowania danych biznesowych dedykowana na komputery stacjonarne</p>
-              </li>
-              <li>
-                <h2>MIS MOBILE</h2>
-                <p>Aplikacja służaca do wyświetlania danych biznesowych na urządzenia przenośne z Androidem oraz IOS</p>
-              </li>
-              <li>
-                <h2>NEO 2.0</h2>
-                <p>Odświeżenie warstwy wizualnej dla platformy raportującej dane biznesowe</p>
-              </li>
-              <li>
-                <h2>Academic League of Game</h2>
-                <p>Portal zajmujacy się zarządzaniem meczami e-sportowymi oraz wyświetlający statystyki z nimi związane</p>
-              </li>
-              <li>
-                <h2>Portal growy Zagrani.pl</h2>
-                <p>Redaktor oraz administrator portalu</p>
-              </li>
-              <li>
-                <h2>Strona Samorządu Uczelni</h2>
-                <p>Zarządzanie i tworzenie nowych treści związanych z życiem uczelni</p>
-              </li>
+              {
+                projects.length !== 0 && (
+                  projects.map( ({tittle, order, endDate,about}) => (
+                    <li key={order}>
+                      <h2> {tittle} {endDate === null && `(In Progress)`} </h2>
+                      <p>{about}</p>
+                    </li>
+                  ))
+                )
+              }
             </ul>
           </Box>
           <Box title="Praca">
@@ -113,6 +111,12 @@ class App  extends React.Component {
                 <Budge img="" link="">Pakiet Office</Budge> 
               </li>
             </ul>
+          </Box>
+          <Box title="Linki">
+            <a href="https://www.codewars.com/users/Panty/" target="_blank"  rel="noopener noreferrer" style={{display: 'inline-block',width: '400px', height: '40px', backgroundImage: 'url(https://www.codewars.com/users/Panty/badges/large)'}}>
+            </a>
+            <a href="https://github.com/P4NTY" target="_blank"  rel="noopener noreferrer"> github </a>
+            <a href="https://codepen.io/p4nty" target="_blank"  rel="noopener noreferrer"> codepen </a>
           </Box>
         </Page>
       </div>

@@ -25,6 +25,29 @@ const queryProjects = `{
     }
   }`;
 
+  const queryMainpage = `{
+    teches {
+      name
+      icon {
+        url
+      }
+      link
+      
+    }
+    projectses{
+        order
+        tittle
+        about {
+          html
+        }
+           startDate
+        endDate
+        teches {
+          name
+        }
+      }
+  }`;
+
 export const getProjects = () => {
     const request = fetch(`${apiURL}?query=${queryProjects}`)
         .then(res => res.json())
@@ -42,6 +65,20 @@ export const getProjects = () => {
 
 export const getTech = () => {
     const request = fetch(`${apiURL}?query=${queryTechs}`)
+        .then(res => res.json())
+        .then(data => {
+          return data;
+        })
+        .catch(function(error) {
+          console.log(error);
+          return null;
+        });
+
+    return request;
+}
+
+export const getMainpage = () => {
+  const request = fetch(`${apiURL}?query=${queryMainpage}`)
         .then(res => res.json())
         .then(data => {
           return data;
