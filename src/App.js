@@ -16,22 +16,29 @@ import avatar from "./assets/pictures/new low.PNG";
 
 class App  extends React.Component {
   state = {
+    loaded: false,
     techs: [],
     projects: []
   }
-  
+
   setData = () => {
     getMainpage().then( res => (
-      this.setState(()=>({
-        projects: res.data.projectses,
-        techs: res.data.teches
-      }))
+      (res !== null &&
+        this.setState(()=>({
+          projects: res.data.projectses,
+          techs: res.data.teches,
+          loaded: true
+        }))
+      )
     ))
+    this.setState(()=>({
+      loaded: null
+    })) 
   }
 
   render() {
-    const {techs, projects} = this.state;
-    if (projects.length === 0 && techs.length === 0) this.setData();
+    const {techs, projects, loaded} = this.state;
+    if (loaded === false) this.setData();
     return (
       <div className="App">
         <Menu/>
@@ -49,7 +56,7 @@ class App  extends React.Component {
                   projects.map( ({tittle, order, endDate,about}) => (
                     <li key={order}>
                       <h2> {tittle} {endDate === null && `(In Progress)`} </h2>
-                      <p>{about}</p>
+                      <span dangerouslySetInnerHTML={{__html: about.html}}></span>
                     </li>
                   ))
                 )
@@ -79,37 +86,29 @@ class App  extends React.Component {
         <Page>
           <Box title="Umiejętności">
             <ul>
-              <li>
-                <h2>Frontend</h2>
-                <Budge img="" link="https://pl.reactjs.org/">React</Budge>
-                <Budge img="" link="">HTML5, CSS3</Budge>
-                <Budge img="" link="https://sass-lang.com/">SCSS (Sass)</Budge>
-                <Budge img="" link="https://jquery.com/">jQuery</Budge>
-              </li>
-              <li>
-                <h2>Backend</h2>
-                <Budge img="" link="https://nodejs.org/en/">Node.js</Budge>
-                <Budge img="" link="https://www.php.net/">PHP</Budge>
-                <Budge img="" link="https://www.mysql.com/">MySQL</Budge>
-                <Budge img="" link="https://apex.oracle.com/en/">Apex</Budge>
-                <Budge img="" link="https://www.oracle.com/pl/middleware/technologies/bi.html">OBIEE</Budge>
-                <Budge img="" link="https://graphcms.com/">GraphCMS</Budge>
-                <Budge img="" link="https://pl.python.org/">Python</Budge>
-              </li>
-              <li>
-                <h2>Aplikacje</h2>
-                <Budge img="" link="https://docs.microsoft.com/pl-pl/dotnet/csharp/">C#</Budge>
-                <Budge img="" link="">Java</Budge>
-                <Budge img="" link="https://unity.com/">Unity</Budge>
-              </li>
-              <li>
-                <h2>Systemy Operacyjne / oprogramowanie biurowe</h2>
-                <Budge img="" link="">GIT</Budge>
-                <Budge img="" link="">Visual Studio Code</Budge>
-                <Budge img="" link="">Linux</Budge>
-                <Budge img="" link="">Android Studio</Budge>
-                <Budge img="" link="">Pakiet Office</Budge> 
-              </li>
+              {
+                [...new Set(techs.map(tech=> tech.type), [])].map( skill => (
+                    <li key={skill}>
+                      <h2>
+                        {
+                          skill === 'OS' ? 'Systemy Operacyjne' : (skill === 'Programs' ? 'Programy' : (skill === 'App' ? 'Aplikacje' : skill === 'Database' ? 'Bazy danych' : skill))
+                        }
+                      </h2>
+                      {
+                        techs.map(({ name, link, type, icon })=> {
+                          let icon_url;
+                          if (icon !== null) {
+                            icon_url = icon.url;
+                          }
+                          else {
+                            icon_url = '';
+                          }
+                          return skill === type ? <Budge key={name} img={icon_url} link={link}>{name}</Budge> : <></> 
+                        })
+                      }
+                    </li>
+                ))
+              }
             </ul>
           </Box>
           <Box title="Linki">

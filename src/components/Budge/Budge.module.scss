@@ -1,14 +1,23 @@
 .budge {
     display: inline-block;
-    border: 1px solid black;
-    text-align: right;
-    padding: 10px 5px 10px 15px;
-    text-decoration: none;
-    color: black;
+    margin: 0px 5px;
+    vertical-align: top;
 
-    iframe {
-        display: none;
-        position: absolute;
+    a {
+        display: block;
+        text-align: right;
+        padding: 10px 5px 10px 15px;
+        text-decoration: none;
+        color: black;
+        background-size: 100% 100%;
+        width: 80px;
+        height: 80px;
+    }
+    p {
+        padding: 0 !important;
+        margin: 0;
+        text-align: center;
+        width: 80px;
     }
 
     &:hover {

@@ -22,6 +22,7 @@ const queryProjects = `{
         url
       }
       link
+      type
     }
   }`;
 
@@ -32,7 +33,7 @@ const queryProjects = `{
         url
       }
       link
-      
+      type
     }
     projectses{
         order
@@ -48,8 +49,8 @@ const queryProjects = `{
       }
   }`;
 
-export const getProjects = () => {
-    const request = fetch(`${apiURL}?query=${queryProjects}`)
+  const _getData = (query) => {
+    const request = fetch(`${apiURL}?query=${query}`)
         .then(res => res.json())
         .then(data => {
           return data;
@@ -60,33 +61,16 @@ export const getProjects = () => {
         });
 
     return request;
-}
+  }
 
+export const getProjects = () => (
+  _getData(queryProjects)
+)
 
-export const getTech = () => {
-    const request = fetch(`${apiURL}?query=${queryTechs}`)
-        .then(res => res.json())
-        .then(data => {
-          return data;
-        })
-        .catch(function(error) {
-          console.log(error);
-          return null;
-        });
+export const getTech = () => (
+  _getData(queryTechs)
+)
 
-    return request;
-}
-
-export const getMainpage = () => {
-  const request = fetch(`${apiURL}?query=${queryMainpage}`)
-        .then(res => res.json())
-        .then(data => {
-          return data;
-        })
-        .catch(function(error) {
-          console.log(error);
-          return null;
-        });
-
-    return request;
-}
+export const getMainpage = () => (
+  _getData(queryMainpage)
+)
