@@ -6,7 +6,6 @@ const Budge = ({children, img, link}) => (
         <a href={link} target="_blank" rel="noopener noreferrer" style={{backgroundImage: `url(${img})`}}> </a>
         <p>{children}</p>
     </div>
-    
 )
 
 export default Budge;

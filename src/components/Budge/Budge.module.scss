@@ -2,6 +2,9 @@
     display: inline-block;
     margin: 0px 5px;
     vertical-align: top;
+    border: 1px solid;
+    border-radius: 15px;
+    overflow: hidden;
 
     a {
         display: block;
@@ -12,19 +15,16 @@
         background-size: 100% 100%;
         width: 80px;
         height: 80px;
+        border-bottom: 1px solid;
     }
     p {
-        padding: 0 !important;
+        padding: 1px !important;
         margin: 0;
         text-align: center;
         width: 80px;
     }
 
     &:hover {
-        iframe {
-            display: block;
-            width: 600px;
-            height: 600px;
-        }
+        transform: scale(1.1);
     }
 }

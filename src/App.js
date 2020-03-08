@@ -7,6 +7,7 @@ import Menu from './components/Menu/Menu';
 import Picture from "./components/Picture/Picture";
 import Box from "./components/Box/Box";
 import Budge from './components/Budge/Budge';
+import Link from './components/Link/Link';
 
 //import data
 import { getMainpage } from "./Utils/dbase";
@@ -33,7 +34,7 @@ class App  extends React.Component {
     ))
     this.setState(()=>({
       loaded: null
-    })) 
+    }))
   }
 
   render() {
@@ -103,7 +104,7 @@ class App  extends React.Component {
                           else {
                             icon_url = '';
                           }
-                          return skill === type ? <Budge key={name} img={icon_url} link={link}>{name}</Budge> : <></> 
+                          return skill === type ? <Budge key={name} img={icon_url} link={link}>{name}</Budge> : <></>
                         })
                       }
                     </li>
@@ -114,8 +115,12 @@ class App  extends React.Component {
           <Box title="Linki">
             <a href="https://www.codewars.com/users/Panty/" target="_blank"  rel="noopener noreferrer" style={{display: 'inline-block',width: '400px', height: '40px', backgroundImage: 'url(https://www.codewars.com/users/Panty/badges/large)'}}>
             </a>
-            <a href="https://github.com/P4NTY" target="_blank"  rel="noopener noreferrer"> github </a>
-            <a href="https://codepen.io/p4nty" target="_blank"  rel="noopener noreferrer"> codepen </a>
+            <Link img={} link="https://github.com/P4NTY">
+              Github
+            </Link>
+            <Link img={} link="https://codepen.io/p4nty">
+              Codepen
+            </Link>
           </Box>
         </Page>
       </div>
