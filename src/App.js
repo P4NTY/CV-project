@@ -115,10 +115,10 @@ class App  extends React.Component {
           <Box title="Linki">
             <a href="https://www.codewars.com/users/Panty/" target="_blank"  rel="noopener noreferrer" style={{display: 'inline-block',width: '400px', height: '40px', backgroundImage: 'url(https://www.codewars.com/users/Panty/badges/large)'}}>
             </a>
-            <Link img={} link="https://github.com/P4NTY">
+            <Link  link="https://github.com/P4NTY">
               Github
             </Link>
-            <Link img={} link="https://codepen.io/p4nty">
+            <Link  link="https://codepen.io/p4nty">
               Codepen
             </Link>
           </Box>
