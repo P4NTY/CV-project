@@ -1,7 +1,17 @@
+@font-face {
+  font-family: "Yanone Kaffeesatz";
+  src: url("./assets/fonts/YanoneKaffeesatz-VariableFont_wght.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   box-sizing: border-box;
+  font-family: 'Yanone Kaffeesatz';
+  letter-spacing: 1px;
 }
 body {
   background-color: black;
-  
+  background-image: url(./assets/pictures/background.jpg);
+  background-size: contain; 
 }

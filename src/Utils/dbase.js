@@ -7,7 +7,7 @@ const queryProjects = `{
       about {
         html
       }
-         startDate
+      startDate
       endDate
       teches {
         name
@@ -35,13 +35,15 @@ const queryProjects = `{
       link
       type
     }
-    projectses{
+    projectses (
+      orderBy: order_ASC
+    ) {
         order
         tittle
         about {
           html
         }
-           startDate
+        startDate
         endDate
         teches {
           name

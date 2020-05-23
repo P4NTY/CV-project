@@ -13,13 +13,14 @@ import Link from './components/Link/Link';
 import { getMainpage } from "./Utils/dbase";
 
 //import assets
-import avatar from "./assets/pictures/new low.PNG";
+import avatar from "./assets/pictures/avatar.jpg";
 
 class App  extends React.Component {
   state = {
     loaded: false,
     techs: [],
-    projects: []
+    projects: [],
+    menuContent: '',
   }
 
   setData = () => {
@@ -37,25 +38,38 @@ class App  extends React.Component {
     }))
   }
 
+  fillMenu = (content) => {
+    const { menuContent } = this.state;
+    content !== menuContent && this.setState({ menuContent: content });
+  }
+
   render() {
-    const {techs, projects, loaded} = this.state;
+    const {techs, projects, loaded, menuContent} = this.state;
     if (loaded === false) this.setData();
     return (
       <div className="App">
-        <Menu/>
+        <Menu>
+            {menuContent}
+        </Menu>
         <Page>
           <Picture picture={avatar} type="circle" />
           <Box title="Karol Kisz">
-            <h2>Frontend Developer</h2>
-            <p>Na codzień zajmuje się tworzeniem oraz utrzymaniem pulpitów oraz stron internetowych służących do prezentacji i wrpowadzania danych biznesowych.</p>
-            <p>Wcześniej zajmowałem się naprawą komputerów oraz dbaniem o poprawne funkcjonowanie portalu do rozgrywek e-sportowych i organizacją turniejów z nastawieniem na wsparcie techniczne.</p>
+            <ul>
+              <li>
+                <h2>Frontend Developer</h2>
+                <span>
+                  <p>Na codzień zajmuje się tworzeniem oraz utrzymaniem pulpitów oraz stron internetowych służących do prezentacji i wrpowadzania danych biznesowych.</p>
+                  <p>Wcześniej zajmowałem się naprawą komputerów oraz dbaniem o poprawne funkcjonowanie portalu do rozgrywek e-sportowych i organizacją turniejów z nastawieniem na wsparcie techniczne.</p>
+                </span>
+              </li>
+            </ul>
           </Box>
           <Box title="Projekty">
             <ul>
               {
                 projects.length !== 0 && (
                   projects.map( ({tittle, order, endDate,about}) => (
-                    <li key={order}>
+                    <li key={order} onMouseEnter={()=>(true)} onMouseLeave={()=>(true)} >
                       <h2> {tittle} {endDate === null && `(In Progress)`} </h2>
                       <span dangerouslySetInnerHTML={{__html: about.html}}></span>
                     </li>
@@ -96,24 +110,18 @@ class App  extends React.Component {
                         }
                       </h2>
                       {
-                        techs.map(({ name, link, type, icon })=> {
-                          let icon_url;
-                          if (icon !== null) {
-                            icon_url = icon.url;
-                          }
-                          else {
-                            icon_url = '';
-                          }
-                          return skill === type ? <Budge key={name} img={icon_url} link={link}>{name}</Budge> : <></>
-                        })
-                      }
+                      techs.map(({ name, link, type, icon }) => (
+                        skill === type ? (
+                          <Budge key={name} img={icon !== null ? icon.url : ''} link={link}>{name}</Budge>
+                        ) : <></>
+                      ))}
                     </li>
                 ))
               }
             </ul>
           </Box>
           <Box title="Linki">
-            <a href="https://www.codewars.com/users/Panty/" target="_blank"  rel="noopener noreferrer" style={{display: 'inline-block',width: '400px', height: '40px', backgroundImage: 'url(https://www.codewars.com/users/Panty/badges/large)'}}>
+            <a href="https://www.codewars.com/users/Panty/" target="_blank" rel="noopener noreferrer" style={{display: 'inline-block',width: '400px', height: '40px', backgroundImage: 'url(https://www.codewars.com/users/Panty/badges/large)'}}>
             </a>
             <Link  link="https://github.com/P4NTY">
               Github

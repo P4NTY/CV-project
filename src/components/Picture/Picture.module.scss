@@ -5,6 +5,7 @@ $size: 200px;
     height: $size;
     position: absolute;
     background-position: center;
+    background-size: contain;
     border: 10px solid steelblue;
 
     &.circle {
