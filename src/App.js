@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import { renderToString } from 'react-dom/server';
 
 //import components
 import Page from './components/Page/Page';
@@ -15,12 +16,16 @@ import { getMainpage } from "./Utils/dbase";
 //import assets
 import avatar from "./assets/pictures/avatar.jpg";
 
+//import data projects description
+import projects_desc from "./data/projects_desc.json";
+
 class App  extends React.Component {
   state = {
     loaded: false,
     techs: [],
     projects: [],
     menuContent: '',
+    menuSeeFlag: false,
   }
 
   setData = () => {
@@ -43,12 +48,23 @@ class App  extends React.Component {
     content !== menuContent && this.setState({ menuContent: content });
   }
 
+  seeMenu = () => {
+    this.setState({ menuSeeFlag: true });
+  }
+
+  hideMenu = () => {
+    this.setState({
+      menuSeeFlag: false,
+      menuContent: ''
+    });
+  }
+
   render() {
-    const {techs, projects, loaded, menuContent} = this.state;
+    const { techs, projects, loaded, menuContent, menuSeeFlag } = this.state;
     if (loaded === false) this.setData();
     return (
       <div className="App">
-        <Menu>
+        <Menu see={menuSeeFlag}>
             {menuContent}
         </Menu>
         <Page>
@@ -68,8 +84,38 @@ class App  extends React.Component {
             <ul>
               {
                 projects.length !== 0 && (
-                  projects.map( ({tittle, order, endDate,about}) => (
-                    <li key={order} onMouseEnter={()=>(true)} onMouseLeave={()=>(true)} >
+                  projects.map( ({tittle, order, endDate,about, teches}) => (
+                    <li
+                      key={order}
+                      onMouseEnter={() => {
+                        const { project, role, description } = projects_desc.filter(a => a.project === tittle)[0],
+                          tech = techs.filter(tech => teches.map(a => a.name, []).includes(tech.name), []);
+                        
+                        this.seeMenu();
+                        this.fillMenu(
+                          `<h1>${project}</h1>
+                          <b>${role}</b>
+                          <br/>
+                          ${description}
+                          <br/>
+                          ${tech.map( ({name, icon}) =>
+                            renderToString(
+                              <Budge
+                                key={name}
+                                img={icon !== null ? icon.url : ''}
+                              >
+                                {name}
+                              </Budge>
+                            )
+                          )}
+                          `
+                        );
+                      }}
+                      onMouseLeave={() => {
+                        this.hideMenu();
+
+                      }}
+                    >
                       <h2> {tittle} {endDate === null && `(In Progress)`} </h2>
                       <span dangerouslySetInnerHTML={{__html: about.html}}></span>
                     </li>
@@ -83,17 +129,17 @@ class App  extends React.Component {
               <li>
                 <h2>Santander Bank Polska</h2>
                 <h3>Młodszy Specjalista ds. Informacji Zarządczej</h3>
-                <p>Tworzenie wizualizacji służących do pokazywania danych, utrzymanie działajacych pulpitów oraz wsparcie w sprawach technicznych</p>
+                <p>Tworzenie wizualizacji służących do pokazywania danych,tworzenie i utrzymanie działajacych pulpitów oraz wsparcie w sprawach technicznych.</p>
               </li>
               <li>
                 <h2>Stersystems</h2>
                 <h3>Serwisant sprzętu komputerowego</h3>
-                <p>Diagnoza oraz naprawa sprzętu elektronicznego min. komputerów, konsol, dronów</p>
+                <p>Diagnoza oraz naprawa sprzętu elektronicznego min. komputerów, konsol, dronów.</p>
               </li>
               <li>
                 <h2>Academic League of Game</h2>
                 <h3>Główny administrator oraz developer</h3>
-                <p>Modelowanie bazy danych, tworznie treści internetowych, zarządzanie mediami społecznościowymi</p>
+                <p>Modelowanie bazy danych, tworznie treści internetowych, zarządzanie mediami społecznościowymi.</p>
               </li>
             </ul>
           </Box>
@@ -123,10 +169,10 @@ class App  extends React.Component {
           <Box title="Linki">
             <a href="https://www.codewars.com/users/Panty/" target="_blank" rel="noopener noreferrer" style={{display: 'inline-block',width: '400px', height: '40px', backgroundImage: 'url(https://www.codewars.com/users/Panty/badges/large)'}}>
             </a>
-            <Link  link="https://github.com/P4NTY">
+            <Link link="https://github.com/P4NTY" img={techs.length !== 0 ? techs.filter(tech => tech.name === 'Git')[0].icon.url : ''}>
               Github
             </Link>
-            <Link  link="https://codepen.io/p4nty">
+            <Link link="https://codepen.io/p4nty" img={'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/codepen-4096-black.png'}>
               Codepen
             </Link>
           </Box>

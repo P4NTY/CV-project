@@ -10,8 +10,10 @@
   font-family: 'Yanone Kaffeesatz';
   letter-spacing: 1px;
 }
+
 body {
   background-color: black;
   background-image: url(./assets/pictures/background.jpg);
   background-size: contain; 
+  overflow-x: hidden;
 }

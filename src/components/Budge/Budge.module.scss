@@ -5,6 +5,8 @@
     border: 1px solid;
     border-radius: 15px;
     overflow: hidden;
+    transition: transform .2s ease-in-out;
+    background: white;
 
     a {
         display: block;
