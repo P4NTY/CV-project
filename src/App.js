@@ -68,8 +68,8 @@ class App  extends React.Component {
             {menuContent}
         </Menu>
         <Page>
-          <Picture picture={avatar} type="circle" />
           <Box title="Karol Kisz">
+          <Picture picture={avatar} type="circle" />
             <ul>
               <li>
                 <h2>Frontend Developer</h2>
@@ -86,6 +86,7 @@ class App  extends React.Component {
                 projects.length !== 0 && (
                   projects.map( ({tittle, order, endDate,about, teches}) => (
                     <li
+                      className='hover'
                       key={order}
                       onMouseEnter={() => {
                         const { project, role, description } = projects_desc.filter(a => a.project === tittle)[0],

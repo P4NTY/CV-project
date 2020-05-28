@@ -1,6 +1,8 @@
+$width: 120px;
+
 .box {
     position: relative;
-    width: 100px;
+    width: $width;
     display: inline-block;
     margin: 10px;
     
@@ -8,7 +10,7 @@
         content: '';
         position: absolute;
         z-index: 1;
-        background: linear-gradient(to right, steelblue, #00cbfa);
+        background: linear-gradient(to right, steelblue, #00cbfa , steelblue);
         top: 0; bottom: 0; right: -10px; left: 10px;
         border-radius: 5px;
         transform: scale(1.1);
@@ -23,7 +25,7 @@
         color: black;
         text-decoration: none;
         margin: 10px;
-        width: 100px;
+        width: $width;
         border: 1px solid;
         border-radius: 5px;
         border-top-left-radius: 50%;
@@ -36,15 +38,19 @@
         &:visited {
             color:  black;
         }    
-    
+        span {
+            padding: 3px;
+
+            &:nth-child(2) {
+                display: inline-block;
+                vertical-align: super;
+                padding-left: 10px;
+            }
+        }
+
         img {
             width: 25px;
             height: 25px;
-        }
-        span:nth-child(2) {
-            display: inline-block;
-            vertical-align: super;
-            padding-left: 10px;
         }   
     }
 

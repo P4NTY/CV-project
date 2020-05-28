@@ -1,8 +1,11 @@
-$size: 200px;
+$size: 20vw;
+$max-size: 190px;
 
 .picture {
     width: $size;
     height: $size;
+    max-width: $max-size;
+    max-height: $max-size;
     position: absolute;
     background-position: center;
     background-size: contain;

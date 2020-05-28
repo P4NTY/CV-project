@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+
+.hover {
+  transition: transform .2s ease-in-out;
+
+  &:hover{
+    transform: skew(-20deg) translateX(100px) rotate(-1deg);
+  }
+}
