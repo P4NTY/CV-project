@@ -69,7 +69,7 @@ class App  extends React.Component {
         </Menu>
         <Page>
           <Box title="Karol Kisz">
-          <Picture picture={avatar} type="circle" />
+            <Picture picture={avatar} type="circle" />
             <ul>
               <li>
                 <h2>Frontend Developer</h2>
@@ -91,7 +91,6 @@ class App  extends React.Component {
                       onMouseEnter={() => {
                         const { project, role, description } = projects_desc.filter(a => a.project === tittle)[0],
                           tech = techs.filter(tech => teches.map(a => a.name, []).includes(tech.name), []);
-                        
                         this.seeMenu();
                         this.fillMenu(
                           `<h1>${project}</h1>

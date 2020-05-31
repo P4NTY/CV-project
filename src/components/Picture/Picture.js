@@ -2,7 +2,7 @@ import React from 'react';
 import style from './Picture.module.scss';
 
 const Picture = ({picture, type}) => (
-    <div 
+    <div
         className={`
             ${style.picture}
             ${type === 'circle' ? style.circle : style.sqare}
