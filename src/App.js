@@ -9,6 +9,7 @@ import Picture from "./components/Picture/Picture";
 import Box from "./components/Box/Box";
 import Budge from './components/Budge/Budge';
 import Link from './components/Link/Link';
+import ListItem from "./components/List/List_Item";
 
 //import data
 import { getMainpage } from "./Utils/dbase";
@@ -18,29 +19,35 @@ import avatar from "./assets/pictures/avatar.jpg";
 
 //import data projects description
 import projects_desc from "./data/projects_desc.json";
+import work_desc from "./data/work_desc.json";
 
 class App  extends React.Component {
   state = {
-    loaded: false,
     techs: [],
     projects: [],
     menuContent: '',
     menuSeeFlag: false,
+    width: window.innerWidth,
+    height: window.innerHeight
   }
 
-  setData = () => {
+  componentDidMount() {
+    window.addEventListener('resize', this.updateDimensions);
     getMainpage().then( res => (
       (res !== null &&
         this.setState(()=>({
           projects: res.data.projectses,
           techs: res.data.teches,
-          loaded: true
         }))
       )
     ))
-    this.setState(()=>({
-      loaded: null
-    }))
+  }
+
+  updateDimensions = () => {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
+  };
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateDimensions);
   }
 
   fillMenu = (content) => {
@@ -60,14 +67,15 @@ class App  extends React.Component {
   }
 
   render() {
-    const { techs, projects, loaded, menuContent, menuSeeFlag } = this.state;
-    if (loaded === false) this.setData();
+    const { techs, projects, menuContent, menuSeeFlag, width } = this.state;
     return (
-      <div className="App">
-        <Menu see={menuSeeFlag}>
-            {menuContent}
-        </Menu>
-        <Page>
+      <>
+      {(width <= 1400) ? (<></>) : (
+        <div className="App">
+          <Menu see={menuSeeFlag}>
+              {menuContent}
+          </Menu>
+          <Page>
           <Box title="Karol Kisz">
             <Picture picture={avatar} type="circle" />
             <ul>
@@ -87,7 +95,7 @@ class App  extends React.Component {
                   projects.map( ({tittle, order, endDate,about, teches}) => (
                     <li
                       className='hover'
-                      key={order}
+                      key={order.toString()}
                       onMouseEnter={() => {
                         const { project, role, description } = projects_desc.filter(a => a.project === tittle)[0],
                           tech = techs.filter(tech => teches.map(a => a.name, []).includes(tech.name), []);
@@ -126,21 +134,13 @@ class App  extends React.Component {
           </Box>
           <Box title="Praca">
             <ul>
-              <li>
-                <h2>Santander Bank Polska</h2>
-                <h3>Młodszy Specjalista ds. Informacji Zarządczej</h3>
-                <p>Tworzenie wizualizacji służących do pokazywania danych,tworzenie i utrzymanie działajacych pulpitów oraz wsparcie w sprawach technicznych.</p>
-              </li>
-              <li>
-                <h2>Stersystems</h2>
-                <h3>Serwisant sprzętu komputerowego</h3>
-                <p>Diagnoza oraz naprawa sprzętu elektronicznego min. komputerów, konsol, dronów.</p>
-              </li>
-              <li>
-                <h2>Academic League of Game</h2>
-                <h3>Główny administrator oraz developer</h3>
-                <p>Modelowanie bazy danych, tworznie treści internetowych, zarządzanie mediami społecznościowymi.</p>
-              </li>
+              {
+                work_desc.map( ({title,position,describe}) => (
+                    <ListItem title={title} smTitle={position}>
+                      {describe}
+                    </ListItem>
+                ))
+              }
             </ul>
           </Box>
         </Page>
@@ -148,17 +148,17 @@ class App  extends React.Component {
           <Box title="Umiejętności">
             <ul>
               {
-                [...new Set(techs.map(tech=> tech.type), [])].map( skill => (
-                    <li key={skill}>
+                [...new Set(techs.map(tech=> tech.type), [])].map( (skill, id) => (
+                    <li key={id.toString()}>
                       <h2>
                         {
                           skill === 'OS' ? 'Systemy Operacyjne' : (skill === 'Programs' ? 'Programy' : (skill === 'App' ? 'Aplikacje' : skill === 'Database' ? 'Bazy danych' : skill))
                         }
                       </h2>
                       {
-                      techs.map(({ name, link, type, icon }) => (
+                      techs.map(({ name, link, type, icon }, idd) => (
                         skill === type ? (
-                          <Budge key={name} img={icon !== null ? icon.url : ''} link={link}>{name}</Budge>
+                          <Budge key={idd.toString()} img={icon !== null ? icon.url : ''} link={link}>{name}</Budge>
                         ) : <></>
                       ))}
                     </li>
@@ -175,9 +175,14 @@ class App  extends React.Component {
             <Link link="https://codepen.io/p4nty" img={'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/codepen-4096-black.png'}>
               Codepen
             </Link>
+            <Link link="https://www.youtube.com/channel/UC1f71yYUaQZI27OEoxG7G8g/S" img={'http://icons.iconarchive.com/icons/dakirby309/simply-styled/256/YouTube-icon.png'}>
+              Youtube
+            </Link>
           </Box>
         </Page>
       </div>
+    )}
+    </>
     );
   }
 }

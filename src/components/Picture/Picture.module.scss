@@ -10,7 +10,7 @@ $max-size: 190px;
     background-position: center;
     background-size: contain;
     border: 10px solid steelblue;
-    transform: translateX(-70%);
+    transform: translateX(-70%) translateY(-4%);
 
     &.circle {
         border-radius: 50%;
