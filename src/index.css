@@ -13,8 +13,12 @@
 }
 
 body {
-  background-color: black;
-  background-image: url(./assets/pictures/background.jpg);
-  background-size: contain; 
+  margin: 0;
+  margin-top: -20px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   overflow-x: hidden;
 }

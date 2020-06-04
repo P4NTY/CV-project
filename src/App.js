@@ -66,36 +66,129 @@ class App  extends React.Component {
     });
   }
 
+  getAbout = () => (
+    <Box title="Karol Kisz">
+      <Picture picture={avatar} type="circle" />
+      <ul>
+        <ListItem title="Frontend Developer">
+          <p>Na codzień zajmuje się tworzeniem oraz utrzymaniem pulpitów oraz stron internetowych służących do prezentacji i wrpowadzania danych biznesowych.</p>
+          <p>Wcześniej zajmowałem się naprawą komputerów oraz dbaniem o poprawne funkcjonowanie portalu do rozgrywek e-sportowych i organizacją turniejów z nastawieniem na wsparcie techniczne.</p>
+        </ListItem>
+      </ul>
+    </Box>
+  )
+
+  getWorks = () => (
+    <Box title="Praca">
+      <ul>
+        {
+          work_desc.map( ({title,position,describe}) => (
+              <ListItem title={title} smTitle={position}>
+                <p>{describe}</p>
+              </ListItem>
+          ))
+        }
+      </ul>
+    </Box>
+  )
+
+  getSkills = () => {
+    const { techs } = this.state;
+    return (
+      <Box title="Umiejętności">
+        <ul>
+          {
+            [...new Set(techs.map(tech => tech.type), [])].map( (skill, id) => (
+                <ListItem
+                  key={id.toString()}
+                  title={skill === 'OS' ? 'Systemy Operacyjne' : (skill === 'Programs' ? 'Programy' : (skill === 'App' ? 'Aplikacje' : skill === 'Database' ? 'Bazy danych' : skill))}
+                >
+                  {
+                    techs.filter(({type}) => type === skill, []).map(({ name, link, icon }, idd) => (
+                      <Budge key={idd.toString()} img={icon !== null ? icon.url : ''} link={link}>{name}</Budge>
+                    ))
+                  }
+                </ListItem>
+            ))
+          }
+        </ul>
+      </Box>
+    )
+  }
+
+  getLinks = (mobile = false) => {
+    const {techs} = this.state;
+    return (
+      <Box title="Linki">
+        {mobile ? (
+          <Link link="https://www.codewars.com/users/Panty/" img={'http://www.tachyonlabs.com/codewars-icon-32x32.ico'}>
+            CodeWars
+          </Link>
+        ) : (
+          <a href="https://www.codewars.com/users/Panty/" target="_blank" rel="noopener noreferrer" style={{display: 'inline-block',width: '400px', height: '40px', backgroundImage: 'url(https://www.codewars.com/users/Panty/badges/large)'}}>
+          </a>
+        )}
+        <Link link="https://github.com/P4NTY" img={techs.length !== 0 ? techs.filter(tech => tech.name === 'Git')[0].icon.url : ''}>
+          Github
+        </Link>
+        <Link link="https://codepen.io/p4nty" img={'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/codepen-4096-black.png'}>
+          Codepen
+        </Link>
+        <Link link="https://www.youtube.com/channel/UC1f71yYUaQZI27OEoxG7G8g/S" img={'http://icons.iconarchive.com/icons/dakirby309/simply-styled/256/YouTube-icon.png'}>
+          Youtube
+        </Link>
+        <Link link="https://www.linkedin.com/in/karol-kisz-6a95b1147/" img={'https://www.silversands.co.uk/wp-content/uploads/LinkedIn-Icon.png'}>
+          Linkedin
+        </Link>
+      </Box>
+    )
+  }
+
+
   render() {
-    const { techs, projects, menuContent, menuSeeFlag, width } = this.state;
+    const { getAbout, getWorks, getSkills, getLinks, state: {techs, projects, menuContent, menuSeeFlag, width} } = this;
     return (
       <>
-      {(width <= 1400) ? (<></>) : (
+      {(width <= 1400) ? (
+        <>
+          <br/>
+          {getAbout()}
+          <Box title="Projekty">
+            <ul>
+              {
+                projects.length !== 0 && (
+                  projects.map( ({tittle, order, endDate, about: {html}, teches}) => (
+                    <ListItem
+                      key={order.toString()}
+                      title={`${tittle} ${endDate === null && `(In Progress)`}`}
+                    >
+                      <p>{html.slice(3, html.length - 4)}</p>
+                    </ListItem>
+                  ))
+                )
+              }
+            </ul>
+          </Box>
+          {getWorks()}
+          {getSkills()}
+          {getLinks(true)}
+        </>
+        ) : (
         <div className="App">
           <Menu see={menuSeeFlag}>
               {menuContent}
           </Menu>
           <Page>
-          <Box title="Karol Kisz">
-            <Picture picture={avatar} type="circle" />
-            <ul>
-              <li>
-                <h2>Frontend Developer</h2>
-                <span>
-                  <p>Na codzień zajmuje się tworzeniem oraz utrzymaniem pulpitów oraz stron internetowych służących do prezentacji i wrpowadzania danych biznesowych.</p>
-                  <p>Wcześniej zajmowałem się naprawą komputerów oraz dbaniem o poprawne funkcjonowanie portalu do rozgrywek e-sportowych i organizacją turniejów z nastawieniem na wsparcie techniczne.</p>
-                </span>
-              </li>
-            </ul>
-          </Box>
+          {getAbout()}
           <Box title="Projekty">
             <ul>
               {
                 projects.length !== 0 && (
-                  projects.map( ({tittle, order, endDate,about, teches}) => (
-                    <li
-                      className='hover'
+                  projects.map( ({tittle, order, endDate, about: {html}, teches}) => (
+                    <ListItem
                       key={order.toString()}
+                      title={`${tittle} ${endDate === null && `(In Progress)`}`}
+                      hover
                       onMouseEnter={() => {
                         const { project, role, description } = projects_desc.filter(a => a.project === tittle)[0],
                           tech = techs.filter(tech => teches.map(a => a.name, []).includes(tech.name), []);
@@ -119,66 +212,20 @@ class App  extends React.Component {
                           `
                         );
                       }}
-                      onMouseLeave={() => {
-                        this.hideMenu();
-
-                      }}
+                      onMouseLeave={() => { this.hideMenu(); }}
                     >
-                      <h2> {tittle} {endDate === null && `(In Progress)`} </h2>
-                      <span dangerouslySetInnerHTML={{__html: about.html}}></span>
-                    </li>
+                      <p>{html.slice(3, html.length - 4)}</p>
+                    </ListItem>
                   ))
                 )
               }
             </ul>
           </Box>
-          <Box title="Praca">
-            <ul>
-              {
-                work_desc.map( ({title,position,describe}) => (
-                    <ListItem title={title} smTitle={position}>
-                      {describe}
-                    </ListItem>
-                ))
-              }
-            </ul>
-          </Box>
+          {getWorks()}
         </Page>
         <Page>
-          <Box title="Umiejętności">
-            <ul>
-              {
-                [...new Set(techs.map(tech=> tech.type), [])].map( (skill, id) => (
-                    <li key={id.toString()}>
-                      <h2>
-                        {
-                          skill === 'OS' ? 'Systemy Operacyjne' : (skill === 'Programs' ? 'Programy' : (skill === 'App' ? 'Aplikacje' : skill === 'Database' ? 'Bazy danych' : skill))
-                        }
-                      </h2>
-                      {
-                      techs.map(({ name, link, type, icon }, idd) => (
-                        skill === type ? (
-                          <Budge key={idd.toString()} img={icon !== null ? icon.url : ''} link={link}>{name}</Budge>
-                        ) : <></>
-                      ))}
-                    </li>
-                ))
-              }
-            </ul>
-          </Box>
-          <Box title="Linki">
-            <a href="https://www.codewars.com/users/Panty/" target="_blank" rel="noopener noreferrer" style={{display: 'inline-block',width: '400px', height: '40px', backgroundImage: 'url(https://www.codewars.com/users/Panty/badges/large)'}}>
-            </a>
-            <Link link="https://github.com/P4NTY" img={techs.length !== 0 ? techs.filter(tech => tech.name === 'Git')[0].icon.url : ''}>
-              Github
-            </Link>
-            <Link link="https://codepen.io/p4nty" img={'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/codepen-4096-black.png'}>
-              Codepen
-            </Link>
-            <Link link="https://www.youtube.com/channel/UC1f71yYUaQZI27OEoxG7G8g/S" img={'http://icons.iconarchive.com/icons/dakirby309/simply-styled/256/YouTube-icon.png'}>
-              Youtube
-            </Link>
-          </Box>
+          {getSkills()}
+          {getLinks()}
         </Page>
       </div>
     )}
