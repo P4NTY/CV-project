@@ -146,10 +146,10 @@ class App  extends React.Component {
 
 
   render() {
-    const { getAbout, getWorks, getSkills, getLinks, state: {techs, projects, menuContent, menuSeeFlag, width} } = this;
+    const { getAbout, getWorks, getSkills, getLinks, state: {techs, projects, menuContent, menuSeeFlag, width, height} } = this;
     return (
       <>
-      {(width <= 1400) ? (
+      {(width < 1242) ? (
         <>
           <br/>
           {getAbout()}
@@ -160,7 +160,7 @@ class App  extends React.Component {
                   projects.map( ({tittle, order, endDate, about: {html}, teches}) => (
                     <ListItem
                       key={order.toString()}
-                      title={`${tittle} ${endDate === null && `(In Progress)`}`}
+                      title={`${tittle} ${endDate === null ? `(In Progress)` : ''}`}
                     >
                       <p>{html.slice(3, html.length - 4)}</p>
                     </ListItem>
@@ -174,7 +174,7 @@ class App  extends React.Component {
           {getLinks(true)}
         </>
         ) : (
-        <div className="App">
+        <div className="App" style={{width: width, height: '3070px'}}>
           <Menu see={menuSeeFlag}>
               {menuContent}
           </Menu>
@@ -187,7 +187,7 @@ class App  extends React.Component {
                   projects.map( ({tittle, order, endDate, about: {html}, teches}) => (
                     <ListItem
                       key={order.toString()}
-                      title={`${tittle} ${endDate === null && `(In Progress)`}`}
+                      title={`${tittle} ${endDate === null ? `(In Progress)` : ''}`}
                       hover
                       onMouseEnter={() => {
                         const { project, role, description } = projects_desc.filter(a => a.project === tittle)[0],
