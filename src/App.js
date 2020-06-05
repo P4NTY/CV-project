@@ -146,7 +146,7 @@ class App  extends React.Component {
 
 
   render() {
-    const { getAbout, getWorks, getSkills, getLinks, state: {techs, projects, menuContent, menuSeeFlag, width, height} } = this;
+    const { getAbout, getWorks, getSkills, getLinks, state: {techs, projects, menuContent, menuSeeFlag, width} } = this;
     return (
       <>
       {(width < 1242) ? (
