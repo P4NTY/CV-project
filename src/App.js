@@ -173,7 +173,7 @@ class App  extends React.Component {
           {getSkills()}
           {getLinks(true)}
         </>
-        ) : (
+      ) : (
         <div className="App" style={{width: width, height: '3070px'}}>
           <Menu see={menuSeeFlag}>
               {menuContent}
