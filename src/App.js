@@ -46,6 +46,7 @@ class App  extends React.Component {
   updateDimensions = () => {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   };
+
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateDimensions);
   }
@@ -146,10 +147,10 @@ class App  extends React.Component {
 
 
   render() {
-    const { getAbout, getWorks, getSkills, getLinks, state: {techs, projects, menuContent, menuSeeFlag, width} } = this;
+    const { getAbout, getWorks, getSkills, getLinks, state: {techs, projects, menuContent, menuSeeFlag, width, height} } = this;
     return (
       <>
-      {(width < 1242) ? (
+      {(width < 1242 || height < 540) ? (
         <>
           <br/>
           {getAbout()}
@@ -174,61 +175,60 @@ class App  extends React.Component {
           {getLinks(true)}
         </>
       ) : (
-        <div className="App" style={{width: width, height: '3070px'}}>
+        <div className="App" style={{width: width, height: '9999px'}}>
           <Menu see={menuSeeFlag}>
               {menuContent}
           </Menu>
-          <Page>
-          {getAbout()}
-          <Box title="Projekty">
-            <ul>
-              {
-                projects.length !== 0 && (
-                  projects.map( ({tittle, order, endDate, about: {html}, teches}) => (
-                    <ListItem
-                      key={order.toString()}
-                      title={`${tittle} ${endDate === null ? `(In Progress)` : ''}`}
-                      hover
-                      onMouseEnter={() => {
-                        const { project, role, description } = projects_desc.filter(a => a.project === tittle)[0],
-                          tech = techs.filter(tech => teches.map(a => a.name, []).includes(tech.name), []);
-                        this.seeMenu();
-                        this.fillMenu(
-                          `<h1>${project}</h1>
-                          <b>${role}</b>
-                          <br/>
-                          ${description}
-                          <br/>
-                          ${tech.map( ({name, icon}) =>
-                            renderToString(
-                              <Budge
-                                key={name}
-                                img={icon !== null ? icon.url : ''}
-                              >
-                                {name}
-                              </Budge>
-                            )
-                          )}
-                          `
-                        );
-                      }}
-                      onMouseLeave={() => { this.hideMenu(); }}
-                    >
-                      <p>{html.slice(3, html.length - 4)}</p>
-                    </ListItem>
-                  ))
-                )
-              }
-            </ul>
-          </Box>
-          {getWorks()}
-        </Page>
-        <Page>
-          {getSkills()}
-          {getLinks()}
-        </Page>
-      </div>
-    )}
+          <br/>
+          <Page size={[width,height]}>
+            {getAbout()}
+            <Box title="Projekty">
+              <ul>
+                {
+                  projects.length !== 0 && (
+                    projects.map( ({tittle, order, endDate, about: {html}, teches}) => (
+                      <ListItem
+                        key={order.toString()}
+                        title={`${tittle} ${endDate === null ? `(In Progress)` : ''}`}
+                        hover
+                        onMouseEnter={() => {
+                          const { project, role, description } = projects_desc.filter(a => a.project === tittle)[0],
+                            tech = techs.filter(tech => teches.map(a => a.name, []).includes(tech.name), []);
+                          this.seeMenu();
+                          this.fillMenu(
+                            `<h1>${project}</h1>
+                            <b>${role}</b>
+                            <br/>
+                            ${description}
+                            <br/>
+                            ${tech.map( ({name, icon}) =>
+                              renderToString(
+                                <Budge
+                                  key={name}
+                                  img={icon !== null ? icon.url : ''}
+                                >
+                                  {name}
+                                </Budge>
+                              )
+                            )}
+                            `
+                          );
+                        }}
+                        onMouseLeave={() => { this.hideMenu(); }}
+                      >
+                        <p>{html.slice(3, html.length - 4)}</p>
+                      </ListItem>
+                )))}
+              </ul>
+            </Box>
+            {getWorks()}
+          </Page>
+          <Page size={[width,height]}>
+            {getSkills()}
+            {getLinks()}
+          </Page>
+        </div>
+      )}
     </>
     );
   }
