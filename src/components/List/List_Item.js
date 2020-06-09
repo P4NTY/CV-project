@@ -2,8 +2,13 @@ import React from 'react';
 import style from './List_Item.module.scss';
 import { renderToString } from 'react-dom/server';
 
-const List = ({children, title, smTitle, hover, onMouseEnter, onMouseLeave}) => (
-    <li className={hover && style.hover} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+const List = ({children, title, smTitle, hover, pointer, onMouseEnter, onMouseLeave, onClick}) => (
+    <li
+        className={`${hover && style.hover}  ${pointer && style.pointer}`}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        onClick={onClick}
+    >
         {title && <h2>{title}</h2>}
         {smTitle && <h3>{smTitle}</h3>}
         {

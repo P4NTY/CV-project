@@ -10,7 +10,7 @@ import Box from "./components/Box/Box";
 import Budge from './components/Budge/Budge';
 import Link from './components/Link/Link';
 import ListItem from "./components/List/List_Item";
-
+import Section from "./components/Section/Section";
 //import data
 import { getMainpage } from "./Utils/dbase";
 
@@ -72,7 +72,7 @@ class App  extends React.Component {
       <Picture picture={avatar} type="circle" />
       <ul>
         <ListItem title="Frontend Developer">
-          <p>Na codzień zajmuje się tworzeniem oraz utrzymaniem pulpitów oraz stron internetowych służących do prezentacji i wrpowadzania danych biznesowych.</p>
+          <p>Na codzień zajmuje się tworzeniem oraz utrzymaniem pulpitów oraz stron internetowych służących do prezentacji i wprowadzania danych biznesowych.</p>
           <p>Wcześniej zajmowałem się naprawą komputerów oraz dbaniem o poprawne funkcjonowanie portalu do rozgrywek e-sportowych i organizacją turniejów z nastawieniem na wsparcie techniczne.</p>
         </ListItem>
       </ul>
@@ -122,7 +122,7 @@ class App  extends React.Component {
     return (
       <Box title="Linki">
         {mobile ? (
-          <Link link="https://www.codewars.com/users/Panty/" img={'http://www.tachyonlabs.com/codewars-icon-32x32.ico'}>
+          <Link link="https://www.codewars.com/users/Panty/" img={'https://external-content.duckduckgo.com/ip3/www.codewars.com.ico'}>
             CodeWars
           </Link>
         ) : (
@@ -158,16 +158,38 @@ class App  extends React.Component {
             <ul>
               {
                 projects.length !== 0 && (
-                  projects.map( ({tittle, order, endDate, about: {html}, teches}) => (
-                    <ListItem
-                      key={order.toString()}
-                      title={`${tittle} ${endDate === null ? `(In Progress)` : ''}`}
-                    >
-                      <p>{html.slice(3, html.length - 4)}</p>
-                    </ListItem>
-                  ))
-                )
-              }
+                  projects.map( ({tittle, order, endDate, about: {html}, teches}) => {
+                    const { role, description } = projects_desc.filter(a => a.project === tittle)[0],
+                            tech = techs.filter(tech => teches.map(a => a.name, []).includes(tech.name), []);
+
+                    return (
+                      <ListItem
+                        pointer
+                        key={order.toString()}
+                        title={`${tittle} ${endDate === null ? `(In Progress)` : ''}`}
+                        onClick={(el)=> (
+                          el.currentTarget.querySelector('div').style.display = el.currentTarget.querySelector('div').style.display !== 'block' ? 'block' : 'none'
+                        )}
+                      >
+                        <p>{html.slice(3, html.length - 4)}</p>
+                        <Section hide>
+                          <b>{role}</b>
+                          <p dangerouslySetInnerHTML={{__html: description}}></p>
+                          {
+                            tech.map( ({name, icon}) =>
+                              <Budge
+                                key={name}
+                                img={icon !== null ? icon.url : ''}
+                              >
+                                {name}
+                              </Budge>
+                            )
+                          }
+                        </Section>
+                      </ListItem>
+                    )
+                  })
+              )}
             </ul>
           </Box>
           {getWorks()}
