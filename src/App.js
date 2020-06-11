@@ -16,6 +16,7 @@ import { getMainpage } from "./Utils/dbase";
 
 //import assets
 import avatar from "./assets/pictures/avatar.jpg";
+import NEO_1 from './assets/screens/NEO_1.png';
 
 //import data projects description
 import projects_desc from "./data/projects_desc.json";
@@ -69,7 +70,7 @@ class App  extends React.Component {
 
   getAbout = () => (
     <Box title="Karol Kisz">
-      <Picture picture={avatar} type="circle" />
+      <Picture picture={avatar} circle absolute />
       <ul>
         <ListItem title="Frontend Developer">
           <p>Na codzień zajmuje się tworzeniem oraz utrzymaniem pulpitów oraz stron internetowych służących do prezentacji i wprowadzania danych biznesowych.</p>
@@ -83,8 +84,8 @@ class App  extends React.Component {
     <Box title="Praca">
       <ul>
         {
-          work_desc.map( ({title,position,describe}) => (
-              <ListItem title={title} smTitle={position}>
+          work_desc.map( ({title,position,describe},id) => (
+              <ListItem key={id.toString()} title={position} smTitle={title}>
                 <p>{describe}</p>
               </ListItem>
           ))
@@ -233,6 +234,8 @@ class App  extends React.Component {
                                 </Budge>
                               )
                             )}
+                            <br/><br/>
+                            ${renderToString(<Picture picture={NEO_1} small/>)}
                             `
                           );
                         }}

@@ -2,17 +2,32 @@ $size: 20vw;
 $max-size: 190px;
 
 .picture {
-    width: $size;
-    height: $size;
-    max-width: $max-size;
-    max-height: $max-size;
-    position: absolute;
     background-position: center;
     background-size: contain;
-    border: 10px solid steelblue;
-    transform: translateX(-70%) translateY(-4%);
+    transition: transform .7s ease-in-out;
 
     &.circle {
         border-radius: 50%;
     }
+}
+.absolute {
+    position: absolute;
+    transform: translateX(-70%) translateY(-4%);
+    width: $size;
+    height: $size;
+    max-width: $max-size;
+    max-height: $max-size;
+    border: 10px solid steelblue;
+}
+.small, .medium, .large {
+    height: 100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: auto;
+}
+.medium {
+    transform: scale(3);
+}
+.large {
+    transform: scale(6);
 }

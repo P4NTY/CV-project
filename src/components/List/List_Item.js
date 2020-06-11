@@ -4,7 +4,7 @@ import { renderToString } from 'react-dom/server';
 
 const List = ({children, title, smTitle, hover, pointer, onMouseEnter, onMouseLeave, onClick}) => (
     <li
-        className={`${hover && style.hover}  ${pointer && style.pointer}`}
+        className={`${style.item} ${hover && style.hover}  ${pointer && style.pointer}`}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         onClick={onClick}

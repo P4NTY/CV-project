@@ -1,10 +1,10 @@
 .section {
     background: steelblue;
-    padding: 20px 40px;
-    width: 120%;
-    margin: 0 -148px;
+    padding: 20px 20px;
     text-align: center;
-    border: 3px solid;
+    border-bottom: 3px solid;
+    text-align: justify;
+    text-justify: newspaper;
 }
 
 .hide {

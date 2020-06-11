@@ -11,3 +11,9 @@
 .pointer {
   cursor: pointer;
 }
+
+@media only screen and (max-width: 1242px) {
+  .item span > p{
+    padding-right: 10px;
+  }
+}
