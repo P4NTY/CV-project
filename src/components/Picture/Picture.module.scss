@@ -5,6 +5,8 @@ $max-size: 190px;
     background-position: center;
     background-size: contain;
     transition: transform .7s ease-in-out;
+    z-index: 100;
+    cursor: pointer !important;
 
     &.circle {
         border-radius: 50%;
@@ -13,17 +15,18 @@ $max-size: 190px;
 .absolute {
     position: absolute;
     transform: translateX(-70%) translateY(-4%);
-    width: $size;
-    height: $size;
+    width: $size !important;
+    height: $size !important;
     max-width: $max-size;
     max-height: $max-size;
     border: 10px solid steelblue;
 }
 .small, .medium, .large {
-    height: 100px;
+    display: inline-block !important;
+    margin: 0 10px;
     background-size: contain;
     background-repeat: no-repeat;
-    margin: auto;
+
 }
 .medium {
     transform: scale(3);

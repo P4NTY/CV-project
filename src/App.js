@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.scss';
 import { renderToString } from 'react-dom/server';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 //import components
 import Page from './components/Page/Page';
@@ -17,6 +18,15 @@ import { getMainpage } from "./Utils/dbase";
 //import assets
 import avatar from "./assets/pictures/avatar.jpg";
 import NEO_1 from './assets/screens/NEO_1.png';
+import NEO_2 from './assets/screens/NEO_2.png';
+import Mobile_1 from "./assets/screens/Mobile_1.png";
+import Mobile_2 from "./assets/screens/Mobile_2.png";
+import NPS from "./assets/screens/NPS.png";
+import Koszty from "./assets/screens/Koszty.png";
+import Lite from "./assets/screens/Lite.png";
+
+//import FontAwesome icon
+import { faMailBulk } from '@fortawesome/free-solid-svg-icons'
 
 //import data projects description
 import projects_desc from "./data/projects_desc.json";
@@ -64,9 +74,13 @@ class App  extends React.Component {
   hideMenu = () => {
     this.setState({
       menuSeeFlag: false,
-      menuContent: ''
+      menuContent: renderToString(this.menuContent())
     });
   }
+
+  menuContent = () => (
+    <FontAwesomeIcon icon={faMailBulk} />
+  )
 
   getAbout = () => (
     <Box title="Karol Kisz">
@@ -213,7 +227,9 @@ class App  extends React.Component {
                       <ListItem
                         key={order.toString()}
                         title={`${tittle} ${endDate === null ? `(In Progress)` : ''}`}
-                        hover
+                        onClick={ () => {
+
+                        }}
                         onMouseEnter={() => {
                           const { project, role, description } = projects_desc.filter(a => a.project === tittle)[0],
                             tech = techs.filter(tech => teches.map(a => a.name, []).includes(tech.name), []);
@@ -234,14 +250,16 @@ class App  extends React.Component {
                                 </Budge>
                               )
                             )}
-                            <br/><br/>
-                            ${renderToString(<Picture picture={NEO_1} small/>)}
                             `
                           );
                         }}
                         onMouseLeave={() => { this.hideMenu(); }}
                       >
                         <p>{html.slice(3, html.length - 4)}</p>
+                        <Section>
+                          <Picture picture={NEO_1} small width={160} height={90}/>
+                          <Picture picture={NEO_2} small  width={160} height={90}/>
+                        </Section>
                       </ListItem>
                 )))}
               </ul>
