@@ -34,8 +34,8 @@ const Picture = ({picture, circle, absolute, small, medium, large, width, height
                 ${medium && style.medium}
                 ${(large || size) && style.large}
             `}
-            width={160}
-            height={90}
+            width={width}
+            height={height}
             onClick={() => (handleClick())}
         />
     );

@@ -26,7 +26,7 @@ import Koszty from "./assets/screens/Koszty.png";
 import Lite from "./assets/screens/Lite.png";
 
 //import FontAwesome icon
-import { faMailBulk } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons';
 
 //import data projects description
 import projects_desc from "./data/projects_desc.json";
@@ -49,6 +49,7 @@ class App  extends React.Component {
         this.setState(()=>({
           projects: res.data.projectses,
           techs: res.data.teches,
+          menuContent: renderToString(this.menuContent())
         }))
       )
     ))
@@ -79,7 +80,7 @@ class App  extends React.Component {
   }
 
   menuContent = () => (
-    <FontAwesomeIcon icon={faMailBulk} />
+    <a href="mailto:kadwao@gmail.com"><FontAwesomeIcon icon={faEnvelopeOpenText}/></a>
   )
 
   getAbout = () => (
@@ -179,7 +180,6 @@ class App  extends React.Component {
 
                     return (
                       <ListItem
-                        pointer
                         key={order.toString()}
                         title={`${tittle} ${endDate === null ? `(In Progress)` : ''}`}
                         onClick={(el)=> (
@@ -227,9 +227,6 @@ class App  extends React.Component {
                       <ListItem
                         key={order.toString()}
                         title={`${tittle} ${endDate === null ? `(In Progress)` : ''}`}
-                        onClick={ () => {
-
-                        }}
                         onMouseEnter={() => {
                           const { project, role, description } = projects_desc.filter(a => a.project === tittle)[0],
                             tech = techs.filter(tech => teches.map(a => a.name, []).includes(tech.name), []);
@@ -254,11 +251,33 @@ class App  extends React.Component {
                           );
                         }}
                         onMouseLeave={() => { this.hideMenu(); }}
+                        onClick={ (el)=> (
+                          el.currentTarget.querySelector('div').style.display = el.currentTarget.querySelector('div').style.display !== 'block' ? 'block' : 'none'
+                        )}
                       >
                         <p>{html.slice(3, html.length - 4)}</p>
-                        <Section>
-                          <Picture picture={NEO_1} small width={160} height={90}/>
-                          <Picture picture={NEO_2} small  width={160} height={90}/>
+                        <Section hide>
+                          {
+                            (tittle === 'MIS LITE') ? (
+                              <Picture picture={Lite} width={160} height={90} />
+                            ) : (
+                              (tittle === 'MIS MOBILE') ? (
+                                <>
+                                  <Picture picture={Mobile_1} small width={90} height={160}/>
+                                  <Picture picture={Mobile_2} small  width={90} height={160}/>
+                                </>
+                              ) : (
+                                (tittle === 'NEO 2.0') ? (
+                                  <>
+                                    <Picture picture={NEO_1} small width={160} height={90}/>
+                                    <Picture picture={NEO_2} small  width={160} height={90}/>
+                                    <Picture picture={Koszty} small  width={160} height={90}/>
+                                    <Picture picture={NPS} small  width={160} height={90}/>
+                                  </>
+                                ) : ''
+                              )
+                            )
+                          }
                         </Section>
                       </ListItem>
                 )))}

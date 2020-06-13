@@ -5,6 +5,14 @@
     border-bottom: 3px solid;
     text-align: justify;
     text-justify: newspaper;
+    position: relative;
+
+    [data-prefix="fas"] {
+        opacity: 0.4;
+        position: absolute;
+        bottom: 0;
+        right: 5px;
+    }
 }
 
 .hide {
