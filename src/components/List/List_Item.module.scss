@@ -1,10 +1,11 @@
 .hover {
-  *{
-    transition: transform .2s ease-in-out;
+  & > h2{
+    transition: transform .2s ease-in-out, text-shadow .2s linear;
   }
 
-  &:hover *{
-    transform: skew(-20deg) translateX(100px) rotate(-1deg);
+  &:hover h2 {
+    transform: scale(1.1) translateX(100px);
+    text-shadow: 0 0 2px paleturquoise;
   }
 }
 

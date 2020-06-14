@@ -12,6 +12,7 @@ import Budge from './components/Budge/Budge';
 import Link from './components/Link/Link';
 import ListItem from "./components/List/List_Item";
 import Section from "./components/Section/Section";
+
 //import data
 import { getMainpage } from "./Utils/dbase";
 
@@ -21,9 +22,16 @@ import NEO_1 from './assets/screens/NEO_1.png';
 import NEO_2 from './assets/screens/NEO_2.png';
 import Mobile_1 from "./assets/screens/Mobile_1.png";
 import Mobile_2 from "./assets/screens/Mobile_2.png";
+import Mobile_3 from "./assets/screens/Mobile_3.png";
 import NPS from "./assets/screens/NPS.png";
 import Koszty from "./assets/screens/Koszty.png";
 import Lite from "./assets/screens/Lite.png";
+import SF_1 from "./assets/screens/SF_1.png";
+import SF_2 from "./assets/screens/SF_2.png";
+import ALoG_1 from "./assets/screens/ALoG_1.png";
+import ALoG_2 from "./assets/screens/ALoG_2.png";
+import COVID_1 from "./assets/screens/COVID_1.png";
+import COVID_2 from "./assets/screens/COVID_2.png";
 
 //import FontAwesome icon
 import { faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons';
@@ -225,6 +233,7 @@ class App  extends React.Component {
                   projects.length !== 0 && (
                     projects.map( ({tittle, order, endDate, about: {html}, teches}) => (
                       <ListItem
+                        hover
                         key={order.toString()}
                         title={`${tittle} ${endDate === null ? `(In Progress)` : ''}`}
                         onMouseEnter={() => {
@@ -265,6 +274,7 @@ class App  extends React.Component {
                                 <>
                                   <Picture picture={Mobile_1} small width={90} height={160}/>
                                   <Picture picture={Mobile_2} small  width={90} height={160}/>
+                                  <Picture picture={Mobile_3} small  width={160} height={90}/>
                                 </>
                               ) : (
                                 (tittle === 'NEO 2.0') ? (
@@ -274,7 +284,28 @@ class App  extends React.Component {
                                     <Picture picture={Koszty} small  width={160} height={90}/>
                                     <Picture picture={NPS} small  width={160} height={90}/>
                                   </>
-                                ) : ''
+                                ) : (
+                                  tittle === 'MIS Salesforce' ? (
+                                    <>
+                                      <Picture picture={SF_1} small  width={160} height={90}/>
+                                      <Picture picture={SF_2} small  width={160} height={90}/>
+                                    </>
+                                  ) : (
+                                    (tittle === 'Academic League of Game') ? (
+                                      <>
+                                        <Picture picture={ALoG_1} small  width={160} height={90}/>
+                                        <Picture picture={ALoG_2} small  width={160} height={90}/>
+                                      </>
+                                    ) : (
+                                      (tittle === 'Strona i Stream Covid 19') ? (
+                                        <>
+                                          <Picture picture={COVID_1} small  width={160} height={90}/>
+                                          <Picture picture={COVID_2} small  width={160} height={90}/>
+                                        </>
+                                      ) : 'Niestety nic godnego pozazania się nie zachowało :('
+                                    )
+                                  )
+                                )
                               )
                             )
                           }
