@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import background from '../../assets/pictures/page_bg.png';
 
 const PageDiv = styled.div`
 
-    background-color: white;
+    background-image: ${({background}) => `url('${background}')`};
+    background-size: 10%;
     width: ${({size}) => 210*(size[1] < 883 ? 0.8 : 0.5)}vmin;
     height: ${({size}) => 297*(size[1] < 883 ? 0.8 : 0.5)}vmin;
 
@@ -18,7 +20,7 @@ const PageDiv = styled.div`
 
 
 const Page = ( {children, size } ) => (
-    <PageDiv size={size}>
+    <PageDiv size={size} background={background}>
         {children}
     </PageDiv>
 )

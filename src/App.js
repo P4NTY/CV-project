@@ -302,7 +302,7 @@ class App  extends React.Component {
                                           <Picture picture={COVID_1} small  width={160} height={90}/>
                                           <Picture picture={COVID_2} small  width={160} height={90}/>
                                         </>
-                                      ) : 'Niestety nic godnego pozazania się nie zachowało :('
+                                      ) : 'Niestety nic godnego pozazania się nie zachowało 😞'
                                     )
                                   )
                                 )
