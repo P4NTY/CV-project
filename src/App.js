@@ -40,7 +40,7 @@ import { faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons';
 import projects_desc from "./data/projects_desc.json";
 import work_desc from "./data/work_desc.json";
 
-class App  extends React.Component {
+class App extends React.Component {
   state = {
     techs: [],
     projects: [],
