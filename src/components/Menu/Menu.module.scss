@@ -33,4 +33,13 @@
         }
 
     }
+
+    & > div > a {
+        display: inline-block;
+        margin: 20px 0px;
+    }
+
+    @media print {
+        display: none;
+    }
 }

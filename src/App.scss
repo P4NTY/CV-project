@@ -5,6 +5,11 @@
   background-size: contain;
   overflow: hidden;
   height: 'max-content';
+
+  @media print {
+    background: white !important;
+    width: 210mm !important;
+  }
 }
 
 .svg-inline--fa {

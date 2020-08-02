@@ -28,3 +28,13 @@ body {
   right: 0;
   overflow-x: hidden;
 }
+
+@media print {
+  *, *::after, *::before {
+    font-size: 12pt;
+  }
+
+  h2 {
+    font-size: 16pt !important;
+  }
+}

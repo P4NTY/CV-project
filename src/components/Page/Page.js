@@ -16,6 +16,16 @@ const PageDiv = styled.div`
     padding: 40px;
     box-shadow: 5px 10px 10px grey;
     overflow: hidden;
+
+    @media print {
+        width: 100%;
+        margin: 0;
+        background: white;
+        height: fit-content;
+        max-height: max-content;
+        min-height: min-content;
+        padding: 20px;
+    }
 `
 
 

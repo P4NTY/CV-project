@@ -34,7 +34,7 @@ import COVID_1 from "./assets/screens/COVID_1.png";
 import COVID_2 from "./assets/screens/COVID_2.png";
 
 //import FontAwesome icon
-import { faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelopeOpenText, faFilePdf } from '@fortawesome/free-solid-svg-icons';
 
 //import data projects description
 import projects_desc from "./data/projects_desc.json";
@@ -88,7 +88,10 @@ class App extends React.Component {
   }
 
   menuContent = () => (
-    <a href="mailto:kadwao@gmail.com"><FontAwesomeIcon icon={faEnvelopeOpenText}/></a>
+    <>
+      <a href="javascript:print()"><FontAwesomeIcon icon={faFilePdf}/></a>
+      <a href="mailto:kadwao@gmail.com"><FontAwesomeIcon icon={faEnvelopeOpenText}/></a>
+    </>
   )
 
   getAbout = () => (
@@ -145,14 +148,9 @@ class App extends React.Component {
     const {techs} = this.state;
     return (
       <Box title="Linki">
-        {mobile ? (
-          <Link link="https://www.codewars.com/users/Panty/" img={'https://external-content.duckduckgo.com/ip3/www.codewars.com.ico'}>
-            CodeWars
-          </Link>
-        ) : (
-          <a href="https://www.codewars.com/users/Panty/" target="_blank" rel="noopener noreferrer" style={{display: 'inline-block',width: '400px', height: '40px', backgroundImage: 'url(https://www.codewars.com/users/Panty/badges/large)'}}>
-          </a>
-        )}
+        <Link link="https://www.codewars.com/users/Panty/" img={'https://external-content.duckduckgo.com/ip3/www.codewars.com.ico'}>
+          CodeWars
+        </Link>
         <Link link="https://github.com/P4NTY" img={techs.length !== 0 ? techs.filter(tech => tech.name === 'Git')[0].icon.url : ''}>
           Github
         </Link>

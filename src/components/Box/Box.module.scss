@@ -24,7 +24,13 @@
             padding-left: 40px;
         }
     }
+
     @media only screen and (max-width: 1242px) {
+        margin-right: 0;
+        margin: auto;
+        width: 90%;
+    }
+    @media print {
         margin-right: 0;
         margin: auto;
         width: 90%;
