@@ -220,7 +220,7 @@ class App extends React.Component {
           {getLinks(true)}
         </>
       ) : (
-        <div className="App" style={{width: width, height: '9999px'}}>
+        <div className="App" style={{width: width}}>
           <Menu see={menuSeeFlag}>
               {menuContent}
           </Menu>
