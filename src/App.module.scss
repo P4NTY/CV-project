@@ -10,9 +10,18 @@
     background: white !important;
     width: 210mm !important;
   }
-}
 
-.svg-inline--fa {
-  font-size: 31px;
-  color: white;
+  .menuButton {
+    background: transparent;
+    font-size: 31px;
+    color: white;
+    border: none;
+    margin: 10px auto;
+    cursor: pointer;
+    transition: color .2s ease-in-out;
+
+    &:hover {
+      color: black;
+    }
+  }
 }

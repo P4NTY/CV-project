@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.scss';
+import style from './App.module.scss';
 import { renderToString } from 'react-dom/server';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -89,8 +89,8 @@ class App extends React.Component {
 
   menuContent = () => (
     <>
-      <a href="javascript:print()"><FontAwesomeIcon icon={faFilePdf}/></a>
-      <a href="mailto:kadwao@gmail.com"><FontAwesomeIcon icon={faEnvelopeOpenText}/></a>
+      <button className={style.menuButton} onClick="print()"><FontAwesomeIcon icon={faFilePdf}/></button>
+      <button className={style.menuButton} onClick="mailto:kadwao@gmail.com"><FontAwesomeIcon icon={faEnvelopeOpenText}/></button>
     </>
   )
 
@@ -218,7 +218,7 @@ class App extends React.Component {
           {getLinks(true)}
         </>
       ) : (
-        <div className="App" style={{width: width}}>
+        <div className={style.App} style={{width: width}}>
           <Menu see={menuSeeFlag}>
               {menuContent}
           </Menu>
@@ -271,34 +271,34 @@ class App extends React.Component {
                               (tittle === 'MIS MOBILE') ? (
                                 <>
                                   <Picture picture={Mobile_1} small width={90} height={160}/>
-                                  <Picture picture={Mobile_2} small  width={90} height={160}/>
-                                  <Picture picture={Mobile_3} small  width={160} height={90}/>
+                                  <Picture picture={Mobile_2} small width={90} height={160}/>
+                                  <Picture picture={Mobile_3} small width={160} height={90}/>
                                 </>
                               ) : (
                                 (tittle === 'NEO 2.0') ? (
                                   <>
                                     <Picture picture={NEO_1} small width={160} height={90}/>
-                                    <Picture picture={NEO_2} small  width={160} height={90}/>
-                                    <Picture picture={Koszty} small  width={160} height={90}/>
-                                    <Picture picture={NPS} small  width={160} height={90}/>
+                                    <Picture picture={NEO_2} small width={160} height={90}/>
+                                    <Picture picture={Koszty} small width={160} height={90}/>
+                                    <Picture picture={NPS} small width={160} height={90}/>
                                   </>
                                 ) : (
                                   tittle === 'MIS Salesforce' ? (
                                     <>
-                                      <Picture picture={SF_1} small  width={160} height={90}/>
-                                      <Picture picture={SF_2} small  width={160} height={90}/>
+                                      <Picture picture={SF_1} small width={160} height={90}/>
+                                      <Picture picture={SF_2} small width={160} height={90}/>
                                     </>
                                   ) : (
                                     (tittle === 'Academic League of Game') ? (
                                       <>
-                                        <Picture picture={ALoG_1} small  width={160} height={90}/>
-                                        <Picture picture={ALoG_2} small  width={160} height={90}/>
+                                        <Picture picture={ALoG_1} small width={160} height={90}/>
+                                        <Picture picture={ALoG_2} small width={160} height={90}/>
                                       </>
                                     ) : (
                                       (tittle === 'Strona i Stream Covid 19') ? (
                                         <>
-                                          <Picture picture={COVID_1} small  width={160} height={90}/>
-                                          <Picture picture={COVID_2} small  width={160} height={90}/>
+                                          <Picture picture={COVID_1} small width={160} height={90}/>
+                                          <Picture picture={COVID_2} small width={160} height={90}/>
                                         </>
                                       ) : 'Niestety nic godnego pozazania się nie zachowało 😞'
                                     )

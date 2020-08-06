@@ -1,68 +1,53 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Netlify Status](https://api.netlify.com/api/v1/badges/26d7f500-5d60-491a-8b5a-1717f953349b/deploy-status)](https://app.netlify.com/sites/stupefied-bhaskara-96d2c6/deploys)
 
-## Available Scripts
+# Hi it's ReadMe file for my CV-Project
+Site is under constuction :construction_worker:, but few *test group* say: it's pretty good. So be patient, I work on this almost evening.
 
-In the project directory, you can run:
+I hope You enjoy this project.
 
-### `npm start`
+## Planned features:
+- **Change** Budge - onClick behavior
+    -  **Add** *liryc* description my skill
+    -  **Add** some snipped
+- **Add** Mailling Form
+- **Add** question-mark with information about this site
+- **Add** *live* example for part projects
+- **Add** unit test
+- **Add** SEO
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+----
+## Stucture:
+- public/
+    - favicon.ico
+    - index.html
+    - logo_Karol_Kisz.png
+- src/
+    - assets/
+        -  fonts/
+        -  pictures/
+        -  screens/
+    -  components/
+        -  Box/ `section element`
+        -  Budge/ `Skills element`
+        -  Form/ `mailling form`
+        -  Link/ `links to my other account`
+        -  Menu/ `bar on left`
+        -  Page/ `looks like paper`
+        -  Picture/ `picture on site`
+        -  Section/
+    -  data/ 'local data folder'
+        -  project_desc.json
+        -  work_desc.json
+    -  Utils/ `folder for all re-use function / element / declaration`
+        -  dbase.js `Connection file with all need source`
+    -  App.js `Main page`
+    -  App.module.scss `Styles for App.js`
+    -  index.css `Main CSS with declaration`
+    -  index.js `React render App`
+    -  package.json `config file with script`
+        - "install" `insall / reinstal node`
+        - "start" `run developer build`
+        - "build" `build page`
+        - "test" `run tests`
+        - "server" `create local serwer for testing build`
+       -  "netlify" `send build to host wwww`

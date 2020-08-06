@@ -12,7 +12,7 @@
     {
         "project": "MIS MOBILE",
         "role": "Główny programista oraz desinger.",
-        "description": "<p>Platforma wewnątrz-bankowa do raportowania danych biznesowych za pomocą platform mobilnych. Stworzna z myślą webview z cacheowaniem części danych. Składa się z szeregu pulpitów dla różnych jednostek biznesowych wyświetlając w prosty sposób najistotniejsze dane.</>"
+        "description": "<p>Platforma wewnątrz-bankowa do raportowania danych biznesowych za pomocą platform mobilnych. Stworzna z myślą webview z cacheowaniem części danych. Składa się z szeregu pulpitów dla różnych jednostek biznesowych wyświetlając w prosty sposób najistotniejsze dane.</p>"
     },
     {
         "project": "NEO 2.0",
@@ -22,7 +22,7 @@
     {
         "project": "Academic League of Game",
         "role": "Główny Administrator, programista oraz bazo-danowiec, organizator imprez",
-        "description": "<p> Portal projektu uczelnianego, mającego na celu stworzenie i prowadzenie rozgrywek e-sportowych dedykowanych dla szkół wyższych.</p><p> Portal oferował możliwość zakładania gier w wybranych e-sportowych pozycjach, budowaniem statystyk na podstawie rozegranych meczów oraz część inforamcyjną o przyszłych pojedynkach i turniejach i wydarzeniach. </p>"
+        "description": "<p> Portal projektu uczelnianego, mającego na celu stworzenie i prowadzenie rozgrywek e-sportowych dedykowanych dla szkół wyższych.</p><p> Portal oferował możliwość zakładania gier w wybranych e-sportowych pozycjach, budowaniem statystyk na podstawie rozegranych meczów oraz część inforamcyjną o przyszłych pojedynkach i turniejach i wydarzeniach.</p>"
     },
     {
         "project": "Portal growy Zagrani.pl",
@@ -32,11 +32,16 @@
     {
         "project": "Strona Samorządu Uczniowsiego",
         "role": "Administrator oraz redaktor, członek samorządu, organizator imprez",
-        "description": "<p>Strona zawierająca wiadomości o życiu uczeli oraz studentów.</p><p> Organizowanie ankiet, relacji, wydarzeń uczelnianych oraz opisów życia studenckiego. </p>"
+        "description": "<p>Strona zawierająca wiadomości o życiu uczeli oraz studentów.</p><p> Organizowanie ankiet, relacji, wydarzeń uczelnianych oraz opisów życia studenckiego.</p>"
     },
     {
         "project": "Strona i Stream Covid 19",
         "role": "Programista, desinger, moderator",
-        "description": "<p>Stowrzona w dwa dni strona zawierająca na bierząco aktualizujące się dane dotycząca pandemii wraz z kanałami RSS. Stream wyżej wymienionej strony ze skoczną muzyką. </p><p> Akcja miała miejsce w lutym.</>"
+        "description": "<p>Stowrzona w dwa dni strona zawierająca na bierząco aktualizujące się dane dotycząca pandemii wraz z kanałami RSS. Stream wyżej wymienionej strony ze skoczną muzyką. </p><p> Akcja miała miejsce w lutym.</p>"
+    },
+    {
+        "project": "MOBILE LITE",
+        "role": "Główny programista oraz desinger.",
+        "description": "<p>Połączenie rozwiązań i doświadczeń nabytych w projekcie MIS LITE oraz MIS MOBILE.</p><p>Zrównanie warstw technologicznych oraz wizualizacyjnych do nowych standardów dla aplikacji mobilnej.</p><p></p>"
     }
 ]

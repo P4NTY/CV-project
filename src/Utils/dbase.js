@@ -1,3 +1,5 @@
+
+//GraphCMS
 export const apiURL = 'https://api-euwest.graphcms.com/v1/ck112o9861rbg01e8636r8atb/master';
 
 const queryProjects = `{
@@ -76,3 +78,8 @@ export const getTech = () => (
 export const getMainpage = () => (
   _getData(queryMainpage)
 )
+
+//Airtable
+
+
+//Integromat
