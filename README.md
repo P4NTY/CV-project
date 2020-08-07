@@ -35,7 +35,7 @@ I hope You enjoy this project.
         -  Page/ `looks like paper`
         -  Picture/ `picture on site`
         -  Section/
-    -  data/ 'local data folder'
+    -  data/ `local data folder`
         -  project_desc.json
         -  work_desc.json
     -  Utils/ `folder for all re-use function / element / declaration`
