@@ -3,7 +3,9 @@ import style from './Menu.module.scss';
 
 const Menu = ({children, see}) => (
     <div className={`${style.menu} ${see && style.expand}`}>
-        <div dangerouslySetInnerHTML={{ __html: children }}></div>
+        <div>
+            {children}
+        </div>
     </div>
 )
 

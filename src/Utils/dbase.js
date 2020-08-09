@@ -1,3 +1,4 @@
+import axios from 'axios';
 
 //GraphCMS
 export const apiURL = 'https://api-euwest.graphcms.com/v1/ck112o9861rbg01e8636r8atb/master';
@@ -79,7 +80,27 @@ export const getMainpage = () => (
   _getData(queryMainpage)
 )
 
-//Airtable
+//IP check
+export async function getUserIP() {
+  const request = (
+      await axios.get(`https://api.ipify.org/?format=json`)
+      .then(result => {
+        if (typeof result === 'undefined') return null;
+        return result;
+      })
+      .catch(err => {
+        console.log(err);
+        return null;
+       })
+    );
+
+  return request;
+}
 
 
 //Integromat
+export const getSendURL = (e) => {
+  console.log(e);
+  debugger;
+  // "https://hook.integromat.com/udh829sk3v65d9iw9x928lqyjkg1nhsi"
+}

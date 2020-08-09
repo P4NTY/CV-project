@@ -50,4 +50,4 @@ I hope You enjoy this project.
         - "build" `build page`
         - "test" `run tests`
         - "server" `create local serwer for testing build`
-       -  "netlify" `send build to host wwww`
+        - "netlify" `send build to host wwww`

@@ -38,3 +38,11 @@ body {
     font-size: 16pt !important;
   }
 }
+
+.hidden {
+  display: none;
+}
+
+.notSee {
+  visibility: hidden;
+}

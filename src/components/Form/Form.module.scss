@@ -1,0 +1,80 @@
+.shadow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    background-color: transparentize($color: #444, $amount: 0.3);
+    padding: 50px;
+
+    .date {
+        text-align: right;
+    }
+
+    .form {
+        width: 1120px;
+        min-height: 700px;
+        background-image: url('/static/media/page_bg.b431592a.png');
+        background-size: 10%;
+        padding: 20px;
+        margin: auto;
+
+        .reciver{
+            margin-left: 70px;
+
+             p{
+                margin: 0;
+                padding: 5px 10px;
+            }
+        }
+
+        .sender {
+            display: flex;
+            width: min-content;
+            flex-flow: column;
+            align-self: flex-end;
+            margin: auto;
+            margin-right: 70px;
+
+            input {
+                background: transparent;
+                border: none;
+                border-bottom: 1px solid #444;
+                padding: 5px 10px;
+                width: 230px;
+            }
+        }
+
+        .subject {
+            margin: 50px auto 20px 40px;
+            font-size: 26px;
+            border: none;
+            background: transparent;
+            display: block;
+            width: 400px;
+            border-bottom: 1px solid #444;
+
+        }
+
+        [class~="ql-editor"] {
+            min-height: 300px;
+        }
+    }
+
+    .button {
+        padding: 5px 10px;
+        background: none;
+        border: 1px solid #444;
+        display: block;
+        margin: auto;
+        cursor: pointer;
+        transition: background .1s ease-in-out, color .1s ease-in-out;
+        border-radius: 4px;
+
+        &:hover {
+            color: white;
+            background: #444;
+        }
+    }
+}

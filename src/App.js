@@ -1,6 +1,5 @@
 import React from 'react';
 import style from './App.module.scss';
-import { renderToString } from 'react-dom/server';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 //import components
@@ -12,6 +11,7 @@ import Budge from './components/Budge/Budge';
 import Link from './components/Link/Link';
 import ListItem from "./components/List/List_Item";
 import Section from "./components/Section/Section";
+import Form from "./components/Form/Form";
 
 //import data
 import { getMainpage } from "./Utils/dbase";
@@ -34,7 +34,7 @@ import COVID_1 from "./assets/screens/COVID_1.png";
 import COVID_2 from "./assets/screens/COVID_2.png";
 
 //import FontAwesome icon
-import { faEnvelopeOpenText, faFilePdf } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelopeOpenText, faFilePdf, faQuestion } from '@fortawesome/free-solid-svg-icons';
 
 //import data projects description
 import projects_desc from "./data/projects_desc.json";
@@ -47,7 +47,8 @@ class App extends React.Component {
     menuContent: '',
     menuSeeFlag: false,
     width: window.innerWidth,
-    height: window.innerHeight
+    height: window.innerHeight,
+    seeForm: true,
   }
 
   componentDidMount() {
@@ -57,7 +58,7 @@ class App extends React.Component {
         this.setState(()=>({
           projects: res.data.projectses,
           techs: res.data.teches,
-          menuContent: renderToString(this.menuContent())
+          menuContent: this.menuContent()
         }))
       )
     ))
@@ -83,16 +84,39 @@ class App extends React.Component {
   hideMenu = () => {
     this.setState({
       menuSeeFlag: false,
-      menuContent: renderToString(this.menuContent())
+      menuContent: this.menuContent()
     });
   }
 
-  menuContent = () => (
-    <>
-      <button className={style.menuButton} onClick="print()"><FontAwesomeIcon icon={faFilePdf}/></button>
-      <button className={style.menuButton} onClick="mailto:kadwao@gmail.com"><FontAwesomeIcon icon={faEnvelopeOpenText}/></button>
-    </>
-  )
+  openForm = () => {
+    this.setState({
+      seeForm: true
+    })
+  }
+
+  hideForm = () => {
+    this.setState({
+      seeForm: false
+    })
+  }
+
+  menuContent = () => {
+    const { openForm } = this;
+
+    return (
+      <>
+        <button className={style.menuButton} onClick={()=>(window.print())}>
+          <FontAwesomeIcon icon={faFilePdf}/>
+        </button>
+        <button className={style.menuButton} onClick={()=>(openForm())}>
+          <FontAwesomeIcon icon={faEnvelopeOpenText}/>
+        </button>
+        <button className={style.menuButton}>
+          <FontAwesomeIcon icon={faQuestion}/>
+        </button>
+      </>
+    )
+  }
 
   getAbout = () => (
     <Box title="Karol Kisz">
@@ -144,7 +168,7 @@ class App extends React.Component {
     )
   }
 
-  getLinks = (mobile = false) => {
+  getLinks = () => {
     const {techs} = this.state;
     return (
       <Box title="Linki">
@@ -169,7 +193,7 @@ class App extends React.Component {
 
 
   render() {
-    const { getAbout, getWorks, getSkills, getLinks, state: {techs, projects, menuContent, menuSeeFlag, width, height} } = this;
+    const { getAbout, getWorks, getSkills, getLinks, state: {techs, projects, menuContent, menuSeeFlag, width, height, seeForm} } = this;
     return (
       <>
       {(width < 1242 || height < 540) ? (
@@ -219,6 +243,7 @@ class App extends React.Component {
         </>
       ) : (
         <div className={style.App} style={{width: width}}>
+          { seeForm && <Form fnClose={this.hideForm}/>}
           <Menu see={menuSeeFlag}>
               {menuContent}
           </Menu>
@@ -239,22 +264,17 @@ class App extends React.Component {
                             tech = techs.filter(tech => teches.map(a => a.name, []).includes(tech.name), []);
                           this.seeMenu();
                           this.fillMenu(
-                            `<h1>${project}</h1>
-                            <b>${role}</b>
-                            <br/>
-                            ${description}
-                            <br/>
-                            ${tech.map( ({name, icon}) =>
-                              renderToString(
-                                <Budge
-                                  key={name}
-                                  img={icon !== null ? icon.url : ''}
-                                >
-                                  {name}
-                                </Budge>
-                              )
-                            )}
-                            `
+                            <>
+                              <h1>{project}</h1>
+                              <b>{role}</b>
+                              <p dangerouslySetInnerHTML={{ __html: description }}></p>
+                              {tech.map( ({name, icon}) =>
+                                  <Budge
+                                    key={name}
+                                    img={icon !== null ? icon.url : ''}
+                                  > {name} </Budge>
+                              )}
+                            </>
                           );
                         }}
                         onMouseLeave={() => { this.hideMenu(); }}
