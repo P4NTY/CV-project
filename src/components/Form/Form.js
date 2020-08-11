@@ -8,6 +8,9 @@ import { getSendURL, /* getUserIP */ } from "Utils/dbase";
 const Form = ({fnClose}) => {
     const [name, setName] = useState('');
     const [content, setContent] = useState('');
+    const [email, setEmail] = useState('');
+    const [adInfo, setAdInfo] = useState('');
+    const [subject, setSubject] = useState('');
 
     // getUserIP()
 
@@ -15,9 +18,10 @@ const Form = ({fnClose}) => {
         <div className={style.shadow} data="shadow" onClick={(e)=>(
             e.target.getAttribute('data') && fnClose()
         )}>
-            <form action="" onSubmit={(e)=>getSendURL(e)} method="post" className={style.form} >
+            <div
+                className={style.form}
+            >
                 <p className={style.date}>
-                    {''},
                     {new Date().toISOString().split('T')[0]}
                 </p>
                 <div className={style.reciver}>
@@ -28,18 +32,20 @@ const Form = ({fnClose}) => {
                 </div>
                 <div className={style.sender}>
                     <input type="text" placeholder="Godność" name="Person" onChange={(e)=>(setName(e.target.value))} required/>
-                    <input type="email" placeholder="E-mail" name="E-mail" required />
-                    <input type="text" placeholder="dodatkowe dane kontaktowe" name="Add info"/>
+                    <input type="email" placeholder="E-mail" name="E-mail" required onChange={(e)=>(setEmail(e.target.value))}/>
+                    <input type="text" placeholder="dodatkowe dane kontaktowe" name="Add info" onChange={(e)=>(setAdInfo(e.target.value))}/>
                 </div>
-                <input className={style.subject} name="subject" placeholder="Temat" required/>
+                <input className={style.subject} name="subject" placeholder="Temat" required onChange={(e)=>(setSubject(e.target.value))}/>
                 <ReactQuill theme="snow" value={content} onChange={setContent} className={style.content}/>
-                <textarea name="content" value={content} className="hidden" required readOnly/>
                 <div className={style.footer}>
                     <p>Pozdrawiam</p>
                     <p>{name}</p>
                 </div>
-                <button className={style.button} type="submit">Wyślij</button>
-            </form>
+                <button className={style.button} onClick={()=>{
+                    getSendURL({'Person': name, 'E-mail': email, 'Add info': adInfo, 'subject': subject, 'content': content}) ? alert('Dziękuję za wiadomość') : alert('Nie udało się nadać wiadomości');
+                    fnClose();
+                }}>Wyślij</button>
+            </div>
         </div>
     )
 }

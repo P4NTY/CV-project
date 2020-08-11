@@ -1,9 +1,7 @@
-import axios from 'axios';
-
 //GraphCMS
 export const apiURL = 'https://api-euwest.graphcms.com/v1/ck112o9861rbg01e8636r8atb/master';
 
-const queryProjects = `{
+const queryProjects =  `{
     projectses{
       order
       tittle
@@ -69,38 +67,35 @@ const queryProjects = `{
   }
 
 export const getProjects = () => (
-  _getData(queryProjects)
+  _getData(queryProjects.replace(/ {2,}/g, ' '))
 )
 
 export const getTech = () => (
-  _getData(queryTechs)
+  _getData(queryTechs.replace(/ {2,}/g, ' '))
 )
 
 export const getMainpage = () => (
-  _getData(queryMainpage)
+  _getData(queryMainpage.replace(/ {2,}/g, ' '))
 )
 
 //IP check
 export async function getUserIP() {
-  const request = (
-      await axios.get(`https://api.ipify.org/?format=json`)
-      .then(result => {
-        if (typeof result === 'undefined') return null;
-        return result;
-      })
-      .catch(err => {
-        console.log(err);
-        return null;
-       })
-    );
 
-  return request;
 }
 
 
 //Integromat
-export const getSendURL = (e) => {
-  console.log(e);
-  debugger;
-  // "https://hook.integromat.com/udh829sk3v65d9iw9x928lqyjkg1nhsi"
+export const getSendURL = (formData) => {
+  (async ()=> {
+    const sendData = await fetch("https://hook.integromat.com/udh829sk3v65d9iw9x928lqyjkg1nhsi", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    });
+    await sendData;
+    alert('Dziękuję za wiadomość');
+  })();
 }
