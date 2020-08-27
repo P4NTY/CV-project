@@ -34,11 +34,12 @@ import COVID_1 from "./assets/screens/COVID_1.png";
 import COVID_2 from "./assets/screens/COVID_2.png";
 
 //import FontAwesome icon
-import { faEnvelopeOpenText, faFilePdf, /* faQuestion */ } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelopeOpenText, faFilePdf, faQuestion } from '@fortawesome/free-solid-svg-icons';
 
 //import data projects description
 import projects_desc from "./data/projects_desc.json";
 import work_desc from "./data/work_desc.json";
+import InfoSection from 'components/InfoSection/InfoSection';
 
 class App extends React.Component {
   state = {
@@ -49,6 +50,7 @@ class App extends React.Component {
     width: window.innerWidth,
     height: window.innerHeight,
     seeForm: false,
+    seeAbout: false
   }
 
   componentDidMount() {
@@ -100,8 +102,14 @@ class App extends React.Component {
     })
   }
 
+  seeAbout = () => {
+    this.setState({
+      seeAbout: !this.state.seeAbout
+    })
+  }
+
   menuContent = () => {
-    const { openForm } = this;
+    const { openForm, seeAbout } = this;
 
     return (
       <>
@@ -111,9 +119,9 @@ class App extends React.Component {
         <button className={style.menuButton} onClick={()=>(openForm())}>
           <FontAwesomeIcon icon={faEnvelopeOpenText}/>
         </button>
-        {/* {<button className={style.menuButton}>
+        <button className={style.menuButton} onClick={()=>(seeAbout())}>
           <FontAwesomeIcon icon={faQuestion}/>
-        </button>} */}
+        </button>
       </>
     )
   }
@@ -193,7 +201,7 @@ class App extends React.Component {
 
 
   render() {
-    const { getAbout, getWorks, getSkills, getLinks, state: {techs, projects, menuContent, menuSeeFlag, width, height, seeForm} } = this;
+    const { getAbout, getWorks, getSkills, getLinks, state: {techs, projects, menuContent, menuSeeFlag, width, height, seeForm, seeAbout} } = this;
     return (
       <>
       {(width < 1242 || height < 540) ? (
@@ -244,6 +252,7 @@ class App extends React.Component {
       ) : (
         <div className={style.App} style={{width: width}}>
           { seeForm && <Form fnClose={this.hideForm}/>}
+          <InfoSection see={seeAbout}/>
           <Menu see={menuSeeFlag}>
               {menuContent}
           </Menu>

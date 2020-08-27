@@ -1,0 +1,26 @@
+.wrapper {
+    background: white;
+    width: 80%;
+    margin: auto;
+    position: fixed;
+    z-index: 1000;
+    padding: 40px;
+    padding-right: 80px;
+    top: 10%;
+    left: 50%;
+    transform: translateX(150%);
+    border: 1px solid #444;
+    border-radius: 4px;
+    box-shadow: 10px 20px 50px #444;
+    transition: transform .5s ease-in-out;
+
+    h1, h3 {
+        font-size: larger;
+        font-weight: normal;
+        line-height: 1.1;
+    }
+}
+
+.see {
+    transform: translateX(-50%);
+}
