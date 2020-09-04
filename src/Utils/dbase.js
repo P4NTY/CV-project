@@ -85,17 +85,14 @@ export async function getUserIP() {
 
 
 //Integromat
-export const getSendURL = (formData) => {
-  (async ()=> {
-    const sendData = await fetch("https://hook.integromat.com/udh829sk3v65d9iw9x928lqyjkg1nhsi", {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    });
-    await sendData;
-    alert('Dziękuję za wiadomość');
-  })();
+export async function getSendURL(formData) {
+  const sendData = await fetch("https://hook.integromat.com/udh829sk3v65d9iw9x928lqyjkg1nhsi", {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  });
+  return await sendData;
 }

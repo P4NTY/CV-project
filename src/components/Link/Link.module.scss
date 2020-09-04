@@ -6,6 +6,10 @@ $width: 140px;
     display: inline-block;
     margin: 10px;
 
+    @media print {
+        display: none;
+    }
+
     &::after {
         content: '';
         position: absolute;
@@ -63,5 +67,13 @@ $width: 140px;
             transform: scale(1.35) skew(15deg);
             background-color: paleturquoise;
         }
+    }
+}
+
+.toPrint {
+    display: none;
+    @media print{
+        margin-left: 40px;
+        display: block;
     }
 }

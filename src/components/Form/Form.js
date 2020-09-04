@@ -1,26 +1,21 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import style from './Form.module.scss';
 import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { getSendURL, /* getUserIP */ } from "Utils/dbase";
 
-const Form = ({fnClose}) => {
+const Form = () => {
     const [name, setName] = useState('');
     const [content, setContent] = useState('');
     const [email, setEmail] = useState('');
     const [adInfo, setAdInfo] = useState('');
     const [subject, setSubject] = useState('');
-
-    // getUserIP()
+    const letter = useRef();
 
     return (
-        <div className={style.shadow} data="shadow" onClick={(e)=>(
-            e.target.getAttribute('data') && fnClose()
-        )}>
-            <div
-                className={style.form}
-            >
+        <div className={style.wrapper}>
+            <div className={style.form} ref={letter}>
                 <p className={style.date}>
                     {new Date().toISOString().split('T')[0]}
                 </p>
@@ -42,9 +37,29 @@ const Form = ({fnClose}) => {
                     <p>{name}</p>
                 </div>
                 <button className={style.button} onClick={()=>{
-                    getSendURL({'Person': name, 'E-mail': email, 'Add info': adInfo, 'subject': subject, 'content': content}) ? alert('Dziękuję za wiadomość') : alert('Nie udało się nadać wiadomości');
-                    fnClose();
+                    letter.current.style.transform = 'translateY(-16%)';
+                    setTimeout(getSendURL({
+                        'Person': name,
+                        'E-mail': email,
+                        'Add info': adInfo,
+                        'subject': subject,
+                        'content': content
+                    }).then( res => {
+                        console.log(res.status)
+                        if (res.status === 200){
+                            alert('Dziękuję za wiadomość');
+                            letter.current.querySelectorAll('input').forEach(input => input.innerText = '')
+                        }
+                        else alert('Nie udało się nadać wiadomości')
+                    }) , 500)
+                    setTimeout(() => letter.current.style.transform = 'translateY(-60%)', 600)
                 }}>Wyślij</button>
+            </div>
+            <div className={style.envelope}>
+            </div>
+            <div className={style.wings}>
+                <div className={style.leftWing}/>
+                <div className={style.rightWing}/>
             </div>
         </div>
     )

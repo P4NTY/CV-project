@@ -1,33 +1,86 @@
-.shadow {
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1000;
-    background-color: transparentize($color: #444, $amount: 0.3);
-    padding: 50px;
-    min-height: 100vh;
+$width: 1120px;
+$height: 700px;
 
-    & ~ div {
+.wing {
+    box-shadow: 0 0 10px #444;
+    z-index: 10;
+    bottom: 10px;
+    width: 200%;
+    height: 100%;
+    position: absolute;
+}
+
+.wrapper {
+    width: 65em;
+    margin: auto;
+    margin-top: 100px;
+    position: relative;
+    overflow: hidden;
+    transform: scale(1);
+    height: $height * 2;
+    padding-top: $height;
+    // box-shadow: 5px 10px 10px grey;
+
+    @media print {
         display: none;
     }
 
-    .date {
-        text-align: right;
+    .leftWing {
+        @extend .wing;
+        left: 10px;
+        transform: rotate(33deg);
+        transform-origin: (top left);
+        background-color: #ffffff;
+    }
+
+    .rightWing {
+        @extend .wing;
+        right: 10px;
+        transform: rotate(-33deg);
+        transform-origin: (top right);
+        background-color: #b3b3b3;
+    }
+
+    .envelope {
+        background-color: #cfcfcf;
+        box-shadow: 5px 10px 10px grey;
+        position: absolute;
+        bottom: 10px;
+        top: 70%;
+        left: 10px;
+        right: 10px;
+    }
+    .wings {
+        position: absolute;
+        bottom: 10px;
+        top: 70%;
+        left: 10px;
+        right: 10px;
+        overflow: hidden;
     }
 
     .form {
-        width: 1120px;
-        min-height: 700px;
+        position: absolute;
+        left: 25px;
+        z-index: 1;
+        width: $width;
+        min-height: $height;
         background-image: url('/static/media/page_bg.b431592a.png');
         background-size: 10%;
         padding: 20px;
         margin: auto;
+        box-shadow: 5px 10px 10px grey;
+        transform: translateY(-60%);
+        transition: transform .5s ease-in-out;
+
+        .date {
+            text-align: right;
+        }
 
         .reciver{
             margin-left: 70px;
 
-             p{
+                p{
                 margin: 0;
                 padding: 5px 10px;
             }
@@ -64,25 +117,25 @@
         [class~="ql-editor"] {
             min-height: 300px;
         }
-    }
 
-    .footer {
-        margin-left: 70px;
-    }
+        .footer {
+            margin-left: 70px;
+        }
 
-    .button {
-        padding: 5px 10px;
-        background: none;
-        border: 1px solid #444;
-        display: block;
-        margin: auto;
-        cursor: pointer;
-        transition: background .1s ease-in-out, color .1s ease-in-out;
-        border-radius: 4px;
+        .button {
+            padding: 5px 10px;
+            background: none;
+            border: 1px solid #444;
+            display: block;
+            margin: auto;
+            cursor: pointer;
+            transition: background .1s ease-in-out, color .1s ease-in-out;
+            border-radius: 4px;
 
-        &:hover {
-            color: white;
-            background: #444;
+            &:hover {
+                color: white;
+                background: #444;
+            }
         }
     }
 }

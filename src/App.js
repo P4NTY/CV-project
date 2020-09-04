@@ -49,7 +49,6 @@ class App extends React.Component {
     menuSeeFlag: false,
     width: window.innerWidth,
     height: window.innerHeight,
-    seeForm: false,
     seeAbout: false
   }
 
@@ -90,18 +89,6 @@ class App extends React.Component {
     });
   }
 
-  openForm = () => {
-    this.setState({
-      seeForm: true
-    })
-  }
-
-  hideForm = () => {
-    this.setState({
-      seeForm: false
-    })
-  }
-
   seeAbout = () => {
     this.setState({
       seeAbout: !this.state.seeAbout
@@ -109,14 +96,18 @@ class App extends React.Component {
   }
 
   menuContent = () => {
-    const { openForm, seeAbout } = this;
+    const { seeAbout } = this;
 
     return (
       <>
         <button className={style.menuButton} onClick={()=>(window.print())}>
           <FontAwesomeIcon icon={faFilePdf}/>
         </button>
-        <button className={style.menuButton} onClick={()=>(openForm())}>
+        <button className={style.menuButton} onClick={()=>(window.scroll({
+          top: document.documentElement.scrollHeight,
+          left: 0,
+          behavior: "smooth"
+        }))}>
           <FontAwesomeIcon icon={faEnvelopeOpenText}/>
         </button>
         <button className={style.menuButton} onClick={()=>(seeAbout())}>
@@ -201,7 +192,7 @@ class App extends React.Component {
 
 
   render() {
-    const { getAbout, getWorks, getSkills, getLinks, state: {techs, projects, menuContent, menuSeeFlag, width, height, seeForm, seeAbout} } = this;
+    const { getAbout, getWorks, getSkills, getLinks, state: {techs, projects, menuContent, menuSeeFlag, width, height, seeAbout} } = this;
     return (
       <>
       {(width < 1242 || height < 540) ? (
@@ -251,7 +242,6 @@ class App extends React.Component {
         </>
       ) : (
         <div className={style.App} style={{width: width}}>
-          { seeForm && <Form fnClose={this.hideForm}/>}
           <InfoSection see={seeAbout}/>
           <Menu see={menuSeeFlag}>
               {menuContent}
@@ -329,7 +319,17 @@ class App extends React.Component {
                                           <Picture picture={COVID_1} small width={160} height={90}/>
                                           <Picture picture={COVID_2} small width={160} height={90}/>
                                         </>
-                                      ) : 'Niestety nic godnego pozazania się nie zachowało 😞'
+                                      ) : (
+                                        (tittle === 'MOBILE LITE') ? (
+                                          <>
+                                            <p>Zobacz jak wersja demo</p>
+                                            <Link link="https://relaxed-lalande-6d26f1.netlify.app/">
+                                              Przejdź
+                                            </Link>
+                                          </>
+                                        ) :
+                                        'Niestety nic godnego pozazania się nie zachowało 😞'
+                                        )
                                     )
                                   )
                                 )
@@ -347,6 +347,7 @@ class App extends React.Component {
             {getSkills()}
             {getLinks()}
           </Page>
+          <Form/>
         </div>
       )}
     </>
