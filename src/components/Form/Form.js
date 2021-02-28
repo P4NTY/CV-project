@@ -36,24 +36,26 @@ const Form = () => {
                     <p>Pozdrawiam</p>
                     <p>{name}</p>
                 </div>
-                <button className={style.button} onClick={()=>{
-                    letter.current.style.transform = 'translateY(-16%)';
-                    setTimeout(getSendURL({
-                        'Person': name,
-                        'E-mail': email,
-                        'Add info': adInfo,
-                        'subject': subject,
-                        'content': content
-                    }).then( res => {
-                        console.log(res.status)
-                        if (res.status === 200){
-                            alert('Dziękuję za wiadomość');
-                            letter.current.querySelectorAll('input').forEach(input => input.innerText = '')
-                        }
-                        else alert('Nie udało się nadać wiadomości')
-                    }) , 500)
-                    setTimeout(() => letter.current.style.transform = 'translateY(-60%)', 600)
-                }}>Wyślij</button>
+                <button
+                    className={style.button}
+                    onClick={()=>{
+                        letter.current.style.transform = 'translateY(-16%)';
+                        setTimeout(getSendURL({
+                            'Person': name,
+                            'E-mail': email,
+                            'Add info': adInfo,
+                            'subject': subject,
+                            'content': content
+                        }).then( res => {
+                            console.log(res.status)
+                            if (res.status === 200){
+                                alert('Dziękuję za wiadomość');
+                                letter.current.querySelectorAll('input').forEach(input => input.innerText = '')
+                            }
+                            else alert('Nie udało się nadać wiadomości')
+                        }) , 500)
+                        setTimeout(() => letter.current.style.transform = 'translateY(-60%)', 600)
+                }}> Wyślij </button>
             </div>
             <div className={style.envelope}>
             </div>

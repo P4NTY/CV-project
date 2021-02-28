@@ -320,14 +320,6 @@ class App extends React.Component {
                                           <Picture picture={COVID_2} small width={160} height={90}/>
                                         </>
                                       ) : (
-                                        (tittle === 'MOBILE LITE') ? (
-                                          <>
-                                            <p>Zobacz jak wersja demo</p>
-                                            <Link link="https://relaxed-lalande-6d26f1.netlify.app/">
-                                              Przejdź
-                                            </Link>
-                                          </>
-                                        ) :
                                         'Niestety nic godnego pozazania się nie zachowało 😞'
                                         )
                                     )

@@ -1,28 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import style from './Picture.module.scss';
 
 const Picture = ({picture, circle, absolute, small, medium, large, width, height}) => {
-    const [ size , setSize ] = useState(large);
+    const size = large;
 
-    const handleClick = () => {
-        setSize(!size);
-    }
+    // const handleClick = () => {
+    //     setSize(!size);
+    // }
 
     return (
-        /*
-        <div
-            className={`
-                ${style.picture}
-                ${circle ? style.circle : style.sqare}
-                ${absolute && style.absolute}
-                ${small && style.small}
-                ${medium && style.medium}
-                ${(large || size) && style.large}
-            `}
-            style={{backgroundImage: `url("${picture}")`, width: `${width ? width + 'px' : 'auto'}`, height: `${height ? height + 'px' : 'auto'}`}}
-            onClick={handleClick}
-        ></div>
-        */
         <img
             src={picture}
             alt=""
@@ -36,7 +22,7 @@ const Picture = ({picture, circle, absolute, small, medium, large, width, height
             `}
             width={width}
             height={height}
-            onClick={() => (handleClick())}
+            //onClick={() => (handleClick())}
         />
     );
 }
