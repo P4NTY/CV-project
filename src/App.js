@@ -54,7 +54,7 @@ class App extends React.Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.updateDimensions);
-    getMainpage().then( res => (
+    getMainpage().then( res => {
       (res !== null &&
         this.setState(()=>({
           projects: res.data.projectses,
@@ -62,7 +62,7 @@ class App extends React.Component {
           menuContent: this.menuContent()
         }))
       )
-    ))
+    })
   }
 
   updateDimensions = () => {
@@ -155,8 +155,15 @@ class App extends React.Component {
                   title={skill === 'OS' ? 'Systemy Operacyjne' : (skill === 'Programs' ? 'Programy' : (skill === 'App' ? 'Aplikacje' : skill === 'Database' ? 'Bazy danych' : skill))}
                 >
                   {
-                    techs.filter(({type}) => type === skill, []).map(({ name, link, icon }, idd) => (
-                      <Budge key={idd.toString()} img={icon !== null ? icon.url : ''} link={link}>{name}</Budge>
+                    techs.filter(({type}) => type === skill, []).map(({ name, link, icon: {url}, description}, idd) => (
+                      <Budge
+                        key={idd.toString()}
+                        img={url !== null ? url : ''}
+                        link={link}
+                        description={description}
+                      >
+                        {name}
+                      </Budge>
                     ))
                   }
                 </ListItem>
@@ -204,7 +211,7 @@ class App extends React.Component {
               {
                 projects.length !== 0 && (
                   projects.map( ({tittle, order, endDate, about: {html}, teches}) => {
-                    const { role, description } = projects_desc.filter(a => a.project === tittle)[0],
+                    const { role, description } = projects_desc.filter(a => a.project === tittle)[0]||{},
                             tech = techs.filter(tech => teches.map(a => a.name, []).includes(tech.name), []);
 
                     return (
@@ -259,7 +266,8 @@ class App extends React.Component {
                         key={order.toString()}
                         title={`${tittle} ${endDate === null ? `(In Progress)` : ''}`}
                         onMouseEnter={() => {
-                          const { project, role, description } = projects_desc.filter(a => a.project === tittle)[0],
+                          console.log(projects_desc.filter(a => a.project === tittle)[0])
+                          const { project, role, description } = projects_desc.filter(a => a.project === tittle)[0]||{},
                             tech = techs.filter(tech => teches.map(a => a.name, []).includes(tech.name), []);
                           this.seeMenu();
                           this.fillMenu(

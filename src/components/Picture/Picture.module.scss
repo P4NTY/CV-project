@@ -6,7 +6,6 @@ $max-size: 190px;
     background-size: contain;
     transition: transform .7s ease-in-out;
     z-index: 0;
-    cursor: pointer !important;
 
     &.circle {
         border-radius: 50%;

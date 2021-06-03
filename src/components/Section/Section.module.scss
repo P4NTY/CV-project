@@ -13,6 +13,13 @@
         bottom: 0;
         right: 5px;
     }
+
+    img:hover {
+        transform: scale(4);
+        border: 1px solid lightgray;
+        border-radius: 2px;
+        cursor: pointer;
+    }
 }
 
 .hide {

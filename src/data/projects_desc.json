@@ -43,5 +43,10 @@
         "project": "MOBILE LITE",
         "role": "Główny programista oraz desinger.",
         "description": "<p>Połączenie rozwiązań i doświadczeń nabytych w projekcie MIS LITE oraz MIS MOBILE.</p><p>Zrównanie warstw technologicznych oraz wizualizacyjnych do nowych standardów dla aplikacji mobilnej.</p><p></p>"
+    },
+    {
+        "project": "RPG Assisstant (Discord Bot)",
+        "role": "Główny programista.",
+        "description": "<p> Bot obsługujący karty postaci do gier RPG oraz rzuty kostkami dla serwerów Discord oraz notifikacjami przypominajacymi o kolejnych sesjach. </p>"
     }
 ]

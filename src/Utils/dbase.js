@@ -28,15 +28,21 @@ const queryProjects =  `{
   }`;
 
   const queryMainpage = `{
-    teches {
+    teches (
+      where: { visible: true }
+    ) {
       name
       icon {
         url
       }
       link
       type
+      description {
+        html
+      }
     }
     projectses (
+      where: { visible: true }
       orderBy: order_ASC
     ) {
         order
