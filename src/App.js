@@ -23,7 +23,7 @@ import NEO_2 from './assets/screens/NEO_2.png';
 import Mobile_1 from "./assets/screens/Mobile_1.png";
 import Mobile_2 from "./assets/screens/Mobile_2.png";
 import Mobile_3 from "./assets/screens/Mobile_3.png";
-import NPS from "./assets/screens/NPS.png";
+// import NPS from "./assets/screens/NPS.png";
 import Koszty from "./assets/screens/Koszty.png";
 import Lite from "./assets/screens/Lite.png";
 import SF_1 from "./assets/screens/SF_1.png";
@@ -32,6 +32,11 @@ import ALoG_1 from "./assets/screens/ALoG_1.png";
 import ALoG_2 from "./assets/screens/ALoG_2.png";
 import COVID_1 from "./assets/screens/COVID_1.png";
 import COVID_2 from "./assets/screens/COVID_2.png";
+import Bot_1 from "./assets/screens/Bot_1.png";
+import Bot_2 from "./assets/screens/Bot_2.jpg";
+import Bot_3 from "./assets/screens/Bot_3.jpg";
+
+
 
 //import FontAwesome icon
 import { faEnvelopeOpenText, faFilePdf, faQuestion } from '@fortawesome/free-solid-svg-icons';
@@ -197,9 +202,51 @@ class App extends React.Component {
     )
   }
 
+  getPic = (title) => {
+    switch (title) {
+      case 'MIS LITE':
+        return <Picture picture={Lite} width={160} height={90} />;
+      case 'MIS MOBILE':
+        return <>
+        <Picture picture={Mobile_1} small width={90} height={160}/>
+        <Picture picture={Mobile_2} small width={90} height={160}/>
+        <Picture picture={Mobile_3} small width={160} height={90}/>
+      </>;
+      case 'NEO 2.0':
+        return <>
+        <Picture picture={NEO_1} small width={160} height={90}/>
+        <Picture picture={NEO_2} small width={160} height={90}/>
+        <Picture picture={Koszty} small width={160} height={90}/>
+        {/* <Picture picture={NPS} small width={160} height={90}/> */}
+      </>;
+      case 'MIS Salesforce':
+        return <>
+        <Picture picture={SF_1} small width={160} height={90}/>
+        <Picture picture={SF_2} small width={160} height={90}/>
+      </>;
+      case 'Academic League of Game':
+        return <>
+        <Picture picture={ALoG_1} small width={160} height={90}/>
+        <Picture picture={ALoG_2} small width={160} height={90}/>
+      </>;
+      case 'Strona i Stream Covid 19':
+        return <>
+        <Picture picture={COVID_1} small width={160} height={90}/>
+        <Picture picture={COVID_2} small width={160} height={90}/>
+      </>;
+      case 'RPG Assisstant (Discord Bot)':
+        return <>
+          <Picture picture={Bot_1} small width={160} height={90}/>
+          <Picture picture={Bot_2} small width={160} height={90}/>
+          <Picture picture={Bot_3} small width={160} height={90}/>
+        </>;
+      default:
+        return <>Niestety nic godnego pozazania się nie zachowało 😞</>
+    }
+  }
 
   render() {
-    const { getAbout, getWorks, getSkills, getLinks, state: {techs, projects, menuContent, menuSeeFlag, width, height, seeAbout} } = this;
+    const { getAbout, getWorks, getSkills, getLinks, getPic, state: {techs, projects, menuContent, menuSeeFlag, width, height, seeAbout} } = this;
     return (
       <>
       {(width < 1242 || height < 540) ? (
@@ -210,14 +257,14 @@ class App extends React.Component {
             <ul>
               {
                 projects.length !== 0 && (
-                  projects.map( ({tittle, order, endDate, about: {html}, teches}) => {
-                    const { role, description } = projects_desc.filter(a => a.project === tittle)[0]||{},
+                  projects.map( ({title, order, endDate, about: {html}, teches}) => {
+                    const { role, description } = projects_desc.filter(a => a.project === title)[0]||{},
                             tech = techs.filter(tech => teches.map(a => a.name, []).includes(tech.name), []);
 
                     return (
                       <ListItem
                         key={order.toString()}
-                        title={`${tittle} ${endDate === null ? `(In Progress)` : ''}`}
+                        title={`${title} ${endDate === null ? `(In Progress)` : ''}`}
                         onClick={(el)=> (
                           el.currentTarget.querySelector('div').style.display = el.currentTarget.querySelector('div').style.display !== 'block' ? 'block' : 'none'
                         )}
@@ -260,14 +307,14 @@ class App extends React.Component {
               <ul>
                 {
                   projects.length !== 0 && (
-                    projects.map( ({tittle, order, endDate, about: {html}, teches}) => (
+                    projects.map( ({title, order, endDate, about: {html}, teches}) => (
                       <ListItem
                         hover
                         key={order.toString()}
-                        title={`${tittle} ${endDate === null ? `(In Progress)` : ''}`}
+                        title={`${title} ${endDate === null ? `(In Progress)` : ''}`}
                         onMouseEnter={() => {
-                          console.log(projects_desc.filter(a => a.project === tittle)[0])
-                          const { project, role, description } = projects_desc.filter(a => a.project === tittle)[0]||{},
+                          console.log(projects_desc.filter(a => a.project === title)[0])
+                          const { project, role, description } = projects_desc.filter(a => a.project === title)[0]||{},
                             tech = techs.filter(tech => teches.map(a => a.name, []).includes(tech.name), []);
                           this.seeMenu();
                           this.fillMenu(
@@ -291,51 +338,7 @@ class App extends React.Component {
                       >
                         <p>{html.slice(3, html.length - 4)}</p>
                         <Section hide>
-                          {
-                            (tittle === 'MIS LITE') ? (
-                              <Picture picture={Lite} width={160} height={90} />
-                            ) : (
-                              (tittle === 'MIS MOBILE') ? (
-                                <>
-                                  <Picture picture={Mobile_1} small width={90} height={160}/>
-                                  <Picture picture={Mobile_2} small width={90} height={160}/>
-                                  <Picture picture={Mobile_3} small width={160} height={90}/>
-                                </>
-                              ) : (
-                                (tittle === 'NEO 2.0') ? (
-                                  <>
-                                    <Picture picture={NEO_1} small width={160} height={90}/>
-                                    <Picture picture={NEO_2} small width={160} height={90}/>
-                                    <Picture picture={Koszty} small width={160} height={90}/>
-                                    <Picture picture={NPS} small width={160} height={90}/>
-                                  </>
-                                ) : (
-                                  tittle === 'MIS Salesforce' ? (
-                                    <>
-                                      <Picture picture={SF_1} small width={160} height={90}/>
-                                      <Picture picture={SF_2} small width={160} height={90}/>
-                                    </>
-                                  ) : (
-                                    (tittle === 'Academic League of Game') ? (
-                                      <>
-                                        <Picture picture={ALoG_1} small width={160} height={90}/>
-                                        <Picture picture={ALoG_2} small width={160} height={90}/>
-                                      </>
-                                    ) : (
-                                      (tittle === 'Strona i Stream Covid 19') ? (
-                                        <>
-                                          <Picture picture={COVID_1} small width={160} height={90}/>
-                                          <Picture picture={COVID_2} small width={160} height={90}/>
-                                        </>
-                                      ) : (
-                                        'Niestety nic godnego pozazania się nie zachowało 😞'
-                                        )
-                                    )
-                                  )
-                                )
-                              )
-                            )
-                          }
+                          { getPic(title) }
                         </Section>
                       </ListItem>
                 )))}

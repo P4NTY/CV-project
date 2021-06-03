@@ -4,7 +4,7 @@ export const apiURL = 'https://api-eu-central-1.graphcms.com/v2/ck112o9861rbg01e
 const queryProjects =  `{
     projectses{
       order
-      tittle
+      title
       about {
         html
       }
@@ -46,7 +46,7 @@ const queryProjects =  `{
       orderBy: order_ASC
     ) {
         order
-        tittle
+        title
         about {
           html
         }
