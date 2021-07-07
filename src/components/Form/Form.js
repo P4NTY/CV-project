@@ -27,7 +27,7 @@ const Form = () => {
                 </div>
                 <div className={style.sender}>
                     <input type="text" placeholder="Godność" name="Person" onChange={(e)=>(setName(e.target.value))} required/>
-                    <input type="email" placeholder="E-mail" name="E-mail" required onChange={(e)=>(setEmail(e.target.value))}/>
+                    <input type="email" placeholder="E-mail" name="E-mail" onChange={(e)=>(setEmail(e.target.value))}/>
                     <input type="text" placeholder="dodatkowe dane kontaktowe" name="Add info" onChange={(e)=>(setAdInfo(e.target.value))}/>
                 </div>
                 <input className={style.subject} name="subject" placeholder="Temat" required onChange={(e)=>(setSubject(e.target.value))}/>

@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Kiszu CV",
+  "name": "Karol Kisz CV",
   "icons": [
     {
       "src": "logo_Karol_Kisz.png",
@@ -8,7 +8,7 @@
       "type": "image/x-icon"
     }
   ],
-  "start_url": ".",
+  "start_url": "http://kiszu.pl/CV/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
